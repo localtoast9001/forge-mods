@@ -3,8 +3,12 @@
  */
 package de.shittyco.morematerials;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
+import net.minecraft.block.BlockStairs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -56,6 +60,16 @@ public class MoreMaterialsMod {
     private static BlockStainedBricks stainedBrickBlocks;
 
     /**
+     * Stained brick slabs for registration.
+     */
+    private static BlockStainedBrickSlab[] stainedBrickSlabBlocks;
+
+    /**
+     * Item blocks for the stained brick slabs.
+     */
+    private static ItemSlab[] stainedBrickSlabItemBlocks;
+
+    /**
      * The daub item.
      */
     private static ItemDaub daub;
@@ -69,6 +83,16 @@ public class MoreMaterialsMod {
      * XP gained by smelting.
      */
     private static final float SMELTINGXP = 0.1f;
+
+    /**
+     * Stairs quantity in crafting.
+     */
+    private static final int STAIRS_QUANTITY = 4;
+
+    /**
+     * Slab quantity in crafting.
+     */
+    private static final int SLAB_QUANTITY = 6;
 
     /**
      * Brick quantity for crafting.
@@ -105,6 +129,67 @@ public class MoreMaterialsMod {
     }
 
     /**
+     * Adds the slab recipes to the registry.
+     * @param result the result stack.
+     * @param resultMetadata result metadata or 0.
+     * @param source source block.
+     * @param sourceMetadata source metadata or 0.
+     */
+    private static void addSlabRecipes(
+        final BlockSlab result,
+        final int resultMetadata,
+        final Block source,
+        final int sourceMetadata) {
+        ItemStack resultStack = new ItemStack(
+            result,
+            SLAB_QUANTITY,
+            resultMetadata);
+        ItemStack sourceStack = new ItemStack(source, 1, sourceMetadata);
+        GameRegistry.addRecipe(
+            resultStack,
+            "xxx", "   ", "   ",
+            'x', sourceStack);
+        GameRegistry.addRecipe(
+            resultStack,
+            "   ", "xxx", "   ",
+            'x', sourceStack);
+        GameRegistry.addRecipe(
+            resultStack,
+            "   ", "   ", "xxx",
+            'x', sourceStack);
+    }
+
+    /**
+     * Adds stairs recipes for a block.
+     * @param result result block
+     * @param resultMetadata result metadata or 0.
+     * @param source source block
+     * @param sourceMetadata source metadata or 0.
+     */
+    private static void addStairsRecipes(
+        final BlockStairs result,
+        final int resultMetadata,
+        final Block source,
+        final int sourceMetadata) {
+        ItemStack resultStack = new ItemStack(
+            result,
+            STAIRS_QUANTITY,
+            resultMetadata);
+        ItemStack sourceStack = new ItemStack(
+            source,
+            1,
+            sourceMetadata);
+        GameRegistry.addRecipe(
+            resultStack,
+            "x  ", "xx ", "xxx",
+            'x', sourceStack);
+        GameRegistry.addRecipe(
+            resultStack,
+            "  x", " xx", "xxx",
+            'x', sourceStack);
+    }
+
+    /**
      * Initializes tool items.
      */
     private void initTools() {
@@ -120,15 +205,53 @@ public class MoreMaterialsMod {
         stainedBrickClay = new ItemStainedBrickClay();
         stainedBrick = new ItemStainedBrick();
         stainedBrickBlocks = new BlockStainedBricks();
+        stainedBrickSlabBlocks =
+            new BlockStainedBrickSlab[2 * ColorUtility.COLOR_COUNT];
+        stainedBrickSlabItemBlocks =
+            new ItemSlab[2 * ColorUtility.COLOR_COUNT];
 
         GameRegistry.registerItem(brickClay, ItemBrickClay.ID);
         GameRegistry.registerItem(stainedBrickClay, ItemStainedBrickClay.ID);
         GameRegistry.registerItem(stainedBrick, ItemStainedBrick.ID);
 
         GameRegistry.registerBlock(
-            stainedBrickBlocks,
-            ItemBlockStainedBricks.class,
-            BlockStainedBricks.ID);
+                stainedBrickBlocks,
+                ItemBlockStainedBricks.class,
+                BlockStainedBricks.ID);
+
+        for (int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
+            BlockStainedBrickSlab slab = new BlockStainedBrickSlab(false, i);
+            BlockStainedBrickSlab doubleSlab =
+                new BlockStainedBrickSlab(true, i);
+            ItemSlab itemSlab = new ItemSlab(slab, slab, doubleSlab, false);
+            ItemSlab itemDoubleSlab =
+                new ItemSlab(doubleSlab, slab, doubleSlab, true);
+            stainedBrickSlabBlocks[2 * i] = slab;
+            stainedBrickSlabBlocks[2 * i + 1] = doubleSlab;
+            stainedBrickSlabItemBlocks[2 * i] = itemSlab;
+            stainedBrickSlabItemBlocks[2 * i + 1] = itemDoubleSlab;
+            GameRegistry.registerBlock(
+                slab,
+                ItemBlockStainedBrickSlab.class,
+                slab.getId(),
+                slab,
+                doubleSlab,
+                false);
+            GameRegistry.registerBlock(
+                doubleSlab,
+                ItemBlockStainedBrickSlab.class,
+                doubleSlab.getId(),
+                slab,
+                doubleSlab,
+                true);
+
+            BlockStainedBrickStairs stairs = new BlockStainedBrickStairs(
+                stainedBrickBlocks,
+                i);
+            GameRegistry.registerBlock(stairs, stairs.getId());
+            addSlabRecipes(slab, 0, stainedBrickBlocks, i);
+            addStairsRecipes(stairs, 0, stainedBrickBlocks, i);
+        }
 
         ItemStack clayStack = new ItemStack(Items.clay_ball);
         ItemStack dirtStack = new ItemStack(Blocks.dirt);
