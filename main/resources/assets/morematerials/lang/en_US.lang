@@ -1,5 +1,6 @@
 item.paintbrush.name=Paint Brush
 item.brickClay.name=Brick Clay
+item.daub.name=Daub
 item.stainedBrickClay.black.name=Black Brick Clay
 item.stainedBrickClay.red.name=Red Brick Clay
 item.stainedBrickClay.green.name=Green Brick Clay
@@ -48,3 +49,10 @@ tile.stainedBricks.lightBlue.name=Light Blue Bricks
 tile.stainedBricks.magenta.name=Magenta Bricks
 tile.stainedBricks.orange.name=Orange Bricks
 tile.stainedBricks.white.name=White Bricks
+tile.woodenFrame.oak.name=Oak Wooden Frame
+tile.woodenFrame.big_oak.name=Dark Oak Wooden Frame
+tile.woodenFrame.spruce.name=Spruce Wooden Frame
+tile.woodenFrame.birch.name=Birch Wooden Frame
+tile.woodenFrame.acacia.name=Acacia Wooden Frame
+tile.woodenFrame.jungle.name=Jungle Wooden Frame
+
