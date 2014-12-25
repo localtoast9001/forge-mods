@@ -26,7 +26,7 @@ public class ItemStainedBrick extends ColoredItem {
      * Initializes a new instance of the ItemStainedBrick class.
      */
     public ItemStainedBrick() {
-        super(NAME, "morematerials:stainedbrick");
+        super(NAME, ID);
         setCreativeTab(CreativeTabs.tabMaterials);
     }
 }

@@ -29,7 +29,7 @@ public class ItemDaub extends Item {
      */
     public ItemDaub() {
         setUnlocalizedName(NAME);
-        setTextureName("morematerials:daub");
+        // setTextureName("morematerials:daub");
         setCreativeTab(CreativeTabs.tabMaterials);
     }
 }

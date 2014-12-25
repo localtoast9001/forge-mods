@@ -24,6 +24,6 @@ public class ItemBlockStainedBrickSlab extends ItemSlab {
         final BlockStainedBrickSlab slab,
         final BlockStainedBrickSlab doubleSlab,
         final Boolean stacked) {
-        super(block, slab, doubleSlab, stacked);
+        super(block, slab, doubleSlab);
     }
 }

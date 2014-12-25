@@ -38,7 +38,7 @@ public class ItemPaintbrush extends Item {
      */
     public ItemPaintbrush() {
         setUnlocalizedName(NAME);
-        setTextureName("morematerials:paintbrush");
+        //setTextureName("morematerials:paintbrush");
         setMaxStackSize(MAXSTACKSIZE);
         setMaxDamage(MAXDAMAGE);
         setCreativeTab(CreativeTabs.tabTools);

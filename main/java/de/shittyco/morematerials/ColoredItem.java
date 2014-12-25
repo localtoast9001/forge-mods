@@ -5,13 +5,14 @@ package de.shittyco.morematerials;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.client.resources.model.ModelBakery;
+// import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+// import net.minecraft.util.IIcon;
 
 /**
  * A common base class for items which only have colored variants.
@@ -21,32 +22,21 @@ import net.minecraft.util.IIcon;
 public abstract class ColoredItem extends Item {
 
     /**
-     * the icons for each sub item.
+     * the base model name for each sub item.
      */
-    private IIcon[] icons;
+    private String modelName;
 
     /**
      * Initializes a new instance of the ColoredItem class.
      * @param unlocalizedName the unlocalized name to use.
-     * @param baseTextureName the base texture name.
+     * @param baseModelName the base model name.
      */
     protected ColoredItem(
         final String unlocalizedName,
-        final String baseTextureName) {
+        final String baseModelName) {
         this.setHasSubtypes(true);
         this.setUnlocalizedName(unlocalizedName);
-        this.setTextureName(baseTextureName);
-    }
-
-    /**
-     * Gets an icon index based on an item's damage value.
-     * @param damage from the item stack.
-     * @return the icon to render.
-     */
-    @SideOnly(Side.CLIENT)
-    @Override
-    public final IIcon getIconFromDamage(final int damage) {
-        return this.icons[damage];
+        this.modelName = baseModelName;
     }
 
     /**
@@ -83,16 +73,18 @@ public abstract class ColoredItem extends Item {
     }
 
     /**
-     * registers the icons for the different sub types.
-     * @param iconRegister the object that gets called to register the icons.
+     * Call on init to register the icons for inventory.
      */
     @SideOnly(Side.CLIENT)
-    public final void registerIcons(final IIconRegister iconRegister) {
-        this.icons = new IIcon[ColorUtility.COLOR_IDS.length];
-
-        for (int i = 0; i < ColorUtility.COLOR_IDS.length; i++) {
-            this.icons[i] = iconRegister.registerIcon(
-                this.getIconString() + "_" + ColorUtility.COLOR_IDS[i]);
+    public final void registerModels() {
+        for(int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
+        	ModelBakery.addVariantName(
+        		this, 
+        		"morematerials:" + this.modelName + "_" + ColorUtility.COLOR_IDS[i]);
+        	GameUtility.registerInventoryModel(
+        		this, 
+        		this.modelName + "_" + ColorUtility.COLOR_IDS[i],
+        		i);
         }
     }
 }

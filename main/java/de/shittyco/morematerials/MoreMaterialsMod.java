@@ -6,15 +6,19 @@ package de.shittyco.morematerials;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStairs;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.model.ModelBakery;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * Mod that adds more building materials to the game.
@@ -127,7 +131,7 @@ public class MoreMaterialsMod {
         this.initBricks();
         this.initWattleAndDaub();
     }
-
+    
     /**
      * Adds the slab recipes to the registry.
      * @param result the result stack.
@@ -211,8 +215,12 @@ public class MoreMaterialsMod {
             new ItemSlab[2 * ColorUtility.COLOR_COUNT];
 
         GameRegistry.registerItem(brickClay, ItemBrickClay.ID);
-        GameRegistry.registerItem(stainedBrickClay, ItemStainedBrickClay.ID);
-        GameRegistry.registerItem(stainedBrick, ItemStainedBrick.ID);
+        GameUtility.registerInventoryModel(brickClay, ItemBrickClay.ID, 0);
+      
+        GameRegistry.registerItem(stainedBrickClay, ItemStainedBrickClay.ID);        
+    	GameRegistry.registerItem(stainedBrick, ItemStainedBrick.ID);
+    	stainedBrickClay.registerModels();
+    	stainedBrick.registerModels();
 
         GameRegistry.registerBlock(
                 stainedBrickBlocks,
@@ -220,10 +228,10 @@ public class MoreMaterialsMod {
                 BlockStainedBricks.ID);
 
         for (int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
-            BlockStainedBrickSlab slab = new BlockStainedBrickSlab(false, i);
+            /*BlockStainedBrickSlab slab = new BlockStainedBrickSlab(false, i);
             BlockStainedBrickSlab doubleSlab =
                 new BlockStainedBrickSlab(true, i);
-            ItemSlab itemSlab = new ItemSlab(slab, slab, doubleSlab, false);
+            ItemSlab itemSlab = new ItemSlab(slab, slab, doubleSlab);
             ItemSlab itemDoubleSlab =
                 new ItemSlab(doubleSlab, slab, doubleSlab, true);
             stainedBrickSlabBlocks[2 * i] = slab;
@@ -250,7 +258,7 @@ public class MoreMaterialsMod {
                 i);
             GameRegistry.registerBlock(stairs, stairs.getId());
             addSlabRecipes(slab, 0, stainedBrickBlocks, i);
-            addStairsRecipes(stairs, 0, stainedBrickBlocks, i);
+            addStairsRecipes(stairs, 0, stainedBrickBlocks, i);*/
         }
 
         ItemStack clayStack = new ItemStack(Items.clay_ball);
@@ -304,6 +312,7 @@ public class MoreMaterialsMod {
     private void initWattleAndDaub() {
         daub = new ItemDaub();
         GameRegistry.registerItem(daub, ItemDaub.ID);
+        GameUtility.registerInventoryModel(daub, ItemDaub.ID, 0);
 
         woodenFrame = new BlockWoodenFrame();
         GameRegistry.registerBlock(

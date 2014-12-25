@@ -5,15 +5,15 @@ package de.shittyco.morematerials;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+//import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+//import net.minecraft.util.IIcon;
 
 /**
  * A wooden frame filled with wattle and daub.
@@ -45,14 +45,14 @@ public class BlockWoodenFrame extends Block {
     /**
      * The set of side icons for each wood type.
      */
-    @SideOnly(Side.CLIENT)
-    private IIcon[] sideIcons;
+    /*@SideOnly(Side.CLIENT)
+    private IIcon[] sideIcons;*/
 
     /**
      * The set of top and bottom icons for each wood type.
      */
-    @SideOnly(Side.CLIENT)
-    private IIcon[] woodIcons;
+    /*@SideOnly(Side.CLIENT)
+    private IIcon[] woodIcons;*/
 
     /**
      * Initializes a new instance of the BlockWoodenFrame class.
@@ -63,8 +63,8 @@ public class BlockWoodenFrame extends Block {
         this.setResistance(RESISTANCE);
         this.setCreativeTab(CreativeTabs.tabBlock);
         this.setStepSound(soundTypeWood);
-        this.setBlockName(NAME);
-        this.setBlockTextureName("morematerials:woodenframe");
+        //this.setBlockName(NAME);
+        //this.setBlockTextureName("morematerials:woodenframe");
     }
 
     /**
@@ -73,7 +73,7 @@ public class BlockWoodenFrame extends Block {
      * @param meta the item metadata.
      * @return the icon to use for the side and meta.
      */
-    @SideOnly(Side.CLIENT)
+    /*@SideOnly(Side.CLIENT)
     public final IIcon getIcon(final int side, final int meta) {
         // top or bottom.
         if (side == 0 || side == 1) {
@@ -81,7 +81,7 @@ public class BlockWoodenFrame extends Block {
         }
 
         return this.sideIcons[meta];
-    }
+    }*/
 
     /**
      * Gets the damage for the item dropped based
@@ -89,10 +89,10 @@ public class BlockWoodenFrame extends Block {
      * @param metadata the block's metadata.
      * @return the damaged value for the item dropped.
      */
-    @Override
+    /*@Override
     public final int damageDropped(final int metadata) {
         return metadata;
-    }
+    }*/
 
     /**
      * returns a list of blocks with the same ID, but different meta
@@ -101,7 +101,7 @@ public class BlockWoodenFrame extends Block {
      * @param tab the creative tab for the item.
      * @param subItems gets populated with sub items.
      */
-    @SideOnly(Side.CLIENT)
+    /*@SideOnly(Side.CLIENT)
     @Override
     public final void getSubBlocks(
         final Item item,
@@ -110,13 +110,13 @@ public class BlockWoodenFrame extends Block {
         for (int i = 0; i < WoodUtility.WOOD_TYPE_COUNT; i++) {
             subItems.add(new ItemStack(item, 1, i));
         }
-    }
+    }*/
 
     /**
      * Registers the block icons.
      * @param iconRegister called back to register icons.
      */
-    @SideOnly(Side.CLIENT)
+    /*@SideOnly(Side.CLIENT)
     public final void registerBlockIcons(final IIconRegister iconRegister) {
         this.sideIcons = new IIcon[WoodUtility.WOOD_TYPE_COUNT];
         this.woodIcons = new IIcon[WoodUtility.WOOD_TYPE_COUNT];
@@ -127,5 +127,5 @@ public class BlockWoodenFrame extends Block {
             this.woodIcons[i] = iconRegister.registerIcon(
                 "planks_" + WoodUtility.WOOD_TYPE_IDS[i]);
         }
-    }
+    }*/
 }

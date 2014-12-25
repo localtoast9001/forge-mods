@@ -3,7 +3,14 @@
  */
 package de.shittyco.morematerials;
 
+import java.util.Collection;
+
+import com.google.common.collect.ImmutableMap;
+
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.IBlockState;
 
 /**
  * Stained brick stairs.
@@ -30,12 +37,12 @@ public class BlockStainedBrickStairs extends BlockStairs {
     public BlockStainedBrickStairs(
         final BlockStainedBricks block,
         final int brickColor) {
-        super(block, brickColor);
+        super(getBlockState(block, brickColor));
         this.color = brickColor;
-        this.setBlockName(
+        /*this.setBlockName(
             NAME
             + "."
-            + ColorUtility.COLOR_NAMES[this.color]);
+            + ColorUtility.COLOR_NAMES[this.color]);*/
         this.useNeighborBrightness = true;
     }
 
@@ -49,4 +56,10 @@ public class BlockStainedBrickStairs extends BlockStairs {
            + ColorUtility.COLOR_NAMES[this.color]
            + "_stairs";
     }
+    
+    private static final IBlockState getBlockState(
+    	final BlockStainedBricks block, 
+    	final int brickColor) {
+    	return block.getStateFromMeta(brickColor);
+    }    
 }

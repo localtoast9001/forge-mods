@@ -29,7 +29,7 @@ public class ItemBrickClay extends Item {
      */
     public ItemBrickClay() {
         setUnlocalizedName(NAME);
-        setTextureName("morematerials:brickclay");
+        // setTextureName("morematerials:brickclay");
         setCreativeTab(CreativeTabs.tabMaterials);
     }
 }

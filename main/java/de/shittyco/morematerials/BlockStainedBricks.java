@@ -5,16 +5,16 @@ package de.shittyco.morematerials;
 
 import java.util.List;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+//import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+//import net.minecraft.util.IIcon;
 
 /**
  * Stained Brick Blocks.
@@ -46,8 +46,8 @@ public class BlockStainedBricks extends Block {
     /**
      * The set of icons for each color.
      */
-    @SideOnly(Side.CLIENT)
-    private IIcon[] icons;
+    //@SideOnly(Side.CLIENT)
+    //private IIcon[] icons;
 
     /**
      * Initializes a new instance of the BlockStainedBricks class.
@@ -57,9 +57,9 @@ public class BlockStainedBricks extends Block {
         setHardness(HARDNESS);
         setResistance(RESISTANCE);
         setStepSound(soundTypePiston);
-        setBlockName(NAME);
+        //setBlockName(NAME);
         setCreativeTab(CreativeTabs.tabBlock);
-        setBlockTextureName("morematerials:stainedbricks");
+        //setBlockTextureName("morematerials:stainedbricks");
     }
 
     /**
@@ -68,10 +68,10 @@ public class BlockStainedBricks extends Block {
      * @param meta the item metadata.
      * @return the icon to use for the side and meta.
      */
-    @SideOnly(Side.CLIENT)
+    /*@SideOnly(Side.CLIENT)
     public final IIcon getIcon(final int side, final int meta) {
         return this.icons[meta];
-    }
+    }*/
 
     /**
      * Gets the damage for the item dropped based
@@ -79,10 +79,10 @@ public class BlockStainedBricks extends Block {
      * @param metadata the block's metadata.
      * @return the damaged value for the item dropped.
      */
-    @Override
+    /*@Override
     public final int damageDropped(final int metadata) {
         return metadata;
-    }
+    }*/
 
     /**
      * Gets the sub blocks.
@@ -104,7 +104,7 @@ public class BlockStainedBricks extends Block {
      * Registers the block icons.
      * @param iconRegister called back to register icons.
      */
-    @SideOnly(Side.CLIENT)
+    /*@SideOnly(Side.CLIENT)
     public final void registerBlockIcons(final IIconRegister iconRegister) {
         this.icons = new IIcon[ColorUtility.COLOR_IDS.length];
 
@@ -112,5 +112,5 @@ public class BlockStainedBricks extends Block {
             this.icons[i] = iconRegister.registerIcon(
                 this.getTextureName() + "_" + ColorUtility.COLOR_IDS[i]);
         }
-    }
+    }*/
 }
