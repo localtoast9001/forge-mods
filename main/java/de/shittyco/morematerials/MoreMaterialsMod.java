@@ -316,6 +316,7 @@ public class MoreMaterialsMod {
             woodenFrame,
             ItemBlockWoodenFrame.class,
             BlockWoodenFrame.ID);
+        woodenFrame.registerModels();
 
         ItemStack clayStack = new ItemStack(Items.clay_ball);
         ItemStack dirtStack = new ItemStack(Blocks.dirt);

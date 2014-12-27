@@ -1,5 +1,5 @@
 {
-    "parent": "morematerials:block/wooden_frame_block",
+    "parent": "morematerials:block/wooden_frame_block_jungle",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

@@ -1,5 +1,10 @@
 {
     "variants": {
-        "normal": { "model": "morematerials:wooden_frame_block" }
+        "variant=oak": { "model": "morematerials:wooden_frame_block_oak" },
+        "variant=spruce": { "model": "morematerials:wooden_frame_block_spruce" },
+        "variant=birch": { "model": "morematerials:wooden_frame_block_birch" },
+        "variant=jungle": { "model": "morematerials:wooden_frame_block_jungle" },
+        "variant=acacia": { "model": "morematerials:wooden_frame_block_acacia" },
+        "variant=big_oak": { "model": "morematerials:wooden_frame_block_big_oak" } 
     }
 }
