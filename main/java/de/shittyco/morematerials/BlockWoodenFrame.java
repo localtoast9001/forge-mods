@@ -3,17 +3,9 @@
  */
 package de.shittyco.morematerials;
 
-import java.util.List;
-
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-//import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-//import net.minecraft.util.IIcon;
 
 /**
  * A wooden frame filled with wattle and daub.

@@ -37,7 +37,7 @@ public abstract class BlockStainedBrickSlab extends BlockSlab {
      * Color - normally stored in metadata, but slabs need the meta.
      */
     private int color;
-    
+
     /**
      * whether or not this block is a double stacked slab.
      */
@@ -51,9 +51,8 @@ public abstract class BlockStainedBrickSlab extends BlockSlab {
     public BlockStainedBrickSlab(
         final boolean stacked,
         final int brickColor) {
-        //super(stacked, Material.rock);
-    	super(Material.rock);
-    	this.isStacked = stacked; 
+        super(Material.rock);
+        this.isStacked = stacked;
         this.color = brickColor;
         this.useNeighborBrightness = !stacked;
         setHardness(HARDNESS);
@@ -81,14 +80,14 @@ public abstract class BlockStainedBrickSlab extends BlockSlab {
 
         return result + ID + '_' + ColorUtility.COLOR_IDS[this.color];
     }
-    
+
     /**
      * Gets whether or not this slab is double height.
      * @return true if stacked.
      */
     @Override
     public final boolean isDouble() {
-    	return this.isStacked;
+        return this.isStacked;
     }
 
     /**

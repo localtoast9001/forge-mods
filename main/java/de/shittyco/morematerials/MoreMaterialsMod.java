@@ -6,12 +6,8 @@ package de.shittyco.morematerials;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStairs;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelBakery;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
@@ -131,7 +127,7 @@ public class MoreMaterialsMod {
         this.initBricks();
         this.initWattleAndDaub();
     }
-    
+
     /**
      * Adds the slab recipes to the registry.
      * @param result the result stack.
@@ -216,19 +212,20 @@ public class MoreMaterialsMod {
 
         GameRegistry.registerItem(brickClay, ItemBrickClay.ID);
         GameUtility.registerInventoryModel(brickClay, ItemBrickClay.ID, 0);
-      
-        GameRegistry.registerItem(stainedBrickClay, ItemStainedBrickClay.ID);        
-    	GameRegistry.registerItem(stainedBrick, ItemStainedBrick.ID);
-    	stainedBrickClay.registerModels();
-    	stainedBrick.registerModels();
+
+        GameRegistry.registerItem(stainedBrickClay, ItemStainedBrickClay.ID);
+        GameRegistry.registerItem(stainedBrick, ItemStainedBrick.ID);
+        stainedBrickClay.registerModels();
+        stainedBrick.registerModels();
 
         GameRegistry.registerBlock(
                 stainedBrickBlocks,
                 ItemBlockStainedBricks.class,
                 BlockStainedBricks.ID);
+        stainedBrickBlocks.registerModels();
 
-        for (int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
-            /*BlockStainedBrickSlab slab = new BlockStainedBrickSlab(false, i);
+        /* for (int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
+            BlockStainedBrickSlab slab = new BlockStainedBrickSlab(false, i);
             BlockStainedBrickSlab doubleSlab =
                 new BlockStainedBrickSlab(true, i);
             ItemSlab itemSlab = new ItemSlab(slab, slab, doubleSlab);
@@ -258,8 +255,8 @@ public class MoreMaterialsMod {
                 i);
             GameRegistry.registerBlock(stairs, stairs.getId());
             addSlabRecipes(slab, 0, stainedBrickBlocks, i);
-            addStairsRecipes(stairs, 0, stainedBrickBlocks, i);*/
-        }
+            addStairsRecipes(stairs, 0, stainedBrickBlocks, i);
+        }*/
 
         ItemStack clayStack = new ItemStack(Items.clay_ball);
         ItemStack dirtStack = new ItemStack(Blocks.dirt);

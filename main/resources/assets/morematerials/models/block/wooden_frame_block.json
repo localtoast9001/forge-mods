@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "morematerials:blocks/wooden_frame_block"
+    }
+}

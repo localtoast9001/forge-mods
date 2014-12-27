@@ -77,14 +77,18 @@ public abstract class ColoredItem extends Item {
      */
     @SideOnly(Side.CLIENT)
     public final void registerModels() {
-        for(int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
-        	ModelBakery.addVariantName(
-        		this, 
-        		"morematerials:" + this.modelName + "_" + ColorUtility.COLOR_IDS[i]);
-        	GameUtility.registerInventoryModel(
-        		this, 
-        		this.modelName + "_" + ColorUtility.COLOR_IDS[i],
-        		i);
+        for (int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
+            String variantName = "morematerials:"
+                + this.modelName
+                + "_"
+                + ColorUtility.COLOR_IDS[i];
+            ModelBakery.addVariantName(
+                this,
+                variantName);
+            GameUtility.registerInventoryModel(
+                this,
+                this.modelName + "_" + ColorUtility.COLOR_IDS[i],
+                i);
         }
     }
 }
