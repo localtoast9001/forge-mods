@@ -57,13 +57,13 @@ public class BlockStainedBricks extends ColoredBlock {
     public final void registerModels() {
         Item itemBlock = GameUtility.getItemFromBlock(ID);
         for (int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
-            ModelBakery.addVariantName(
-                itemBlock,
-                "morematerials:" + ID + "_" + ColorUtility.COLOR_IDS[i]);
             GameUtility.registerInventoryModel(
                 itemBlock,
                 ID + "_" + ColorUtility.COLOR_IDS[i],
                 i);
+            ModelBakery.addVariantName(
+                itemBlock,
+                "morematerials:" + ID + "_" + ColorUtility.COLOR_IDS[i]);
         }
     }
 }

@@ -195,6 +195,7 @@ public class MoreMaterialsMod {
     private void initTools() {
         paintbrush = new ItemPaintbrush();
         GameRegistry.registerItem(paintbrush, ItemPaintbrush.ID);
+        GameUtility.registerInventoryModel(paintbrush, ItemPaintbrush.ID, 0);
     }
 
     /**
@@ -224,7 +225,8 @@ public class MoreMaterialsMod {
                 BlockStainedBricks.ID);
         stainedBrickBlocks.registerModels();
 
-        /* for (int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
+        for (int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
+            /*
             BlockStainedBrickSlab slab = new BlockStainedBrickSlab(false, i);
             BlockStainedBrickSlab doubleSlab =
                 new BlockStainedBrickSlab(true, i);
@@ -248,15 +250,16 @@ public class MoreMaterialsMod {
                 doubleSlab.getId(),
                 slab,
                 doubleSlab,
-                true);
+                true);*/
 
             BlockStainedBrickStairs stairs = new BlockStainedBrickStairs(
                 stainedBrickBlocks,
                 i);
             GameRegistry.registerBlock(stairs, stairs.getId());
-            addSlabRecipes(slab, 0, stainedBrickBlocks, i);
+            stairs.registerModels();
+            // addSlabRecipes(slab, 0, stainedBrickBlocks, i);
             addStairsRecipes(stairs, 0, stainedBrickBlocks, i);
-        }*/
+        }
 
         ItemStack clayStack = new ItemStack(Items.clay_ball);
         ItemStack dirtStack = new ItemStack(Blocks.dirt);

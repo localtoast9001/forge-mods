@@ -5,6 +5,10 @@ package de.shittyco.morematerials;
 
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.model.ModelBakery;
+import net.minecraft.item.Item;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Stained brick stairs.
@@ -33,10 +37,10 @@ public class BlockStainedBrickStairs extends BlockStairs {
         final int brickColor) {
         super(getBlockState(block, brickColor));
         this.color = brickColor;
-        /*this.setBlockName(
+        this.setUnlocalizedName(
             NAME
             + "."
-            + ColorUtility.COLOR_NAMES[this.color]);*/
+            + ColorUtility.COLOR_NAMES[this.color]);
         this.useNeighborBrightness = true;
     }
 
@@ -47,8 +51,24 @@ public class BlockStainedBrickStairs extends BlockStairs {
     public final String getId() {
        return BlockStainedBricks.ID
            + "_"
-           + ColorUtility.COLOR_NAMES[this.color]
+           + ColorUtility.COLOR_IDS[this.color]
            + "_stairs";
+    }
+
+    /**
+     * Call on init to register the icons for inventory.
+     */
+    @SideOnly(Side.CLIENT)
+    public final void registerModels() {
+        Item itemBlock = GameUtility.getItemFromBlock(
+            this.getId());
+        ModelBakery.addVariantName(
+            itemBlock,
+            "morematerials:" + this.getId());
+        GameUtility.registerInventoryModel(
+            itemBlock,
+            this.getId(),
+            0);
     }
 
     /**

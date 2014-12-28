@@ -82,13 +82,13 @@ public abstract class ColoredItem extends Item {
                 + this.modelName
                 + "_"
                 + ColorUtility.COLOR_IDS[i];
-            ModelBakery.addVariantName(
-                this,
-                variantName);
             GameUtility.registerInventoryModel(
                 this,
                 this.modelName + "_" + ColorUtility.COLOR_IDS[i],
                 i);
+            ModelBakery.addVariantName(
+                    this,
+                    variantName);
         }
     }
 }
