@@ -21,8 +21,8 @@ public class ItemBlockStainedBrickSlab extends ItemSlab {
      */
     public ItemBlockStainedBrickSlab(
         final Block block,
-        final BlockStainedBrickSlab slab,
-        final BlockStainedBrickSlab doubleSlab,
+        final BlockHalfStainedBrickSlab slab,
+        final BlockDoubleStainedBrickSlab doubleSlab,
         final Boolean stacked) {
         super(block, slab, doubleSlab);
     }

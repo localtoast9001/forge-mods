@@ -226,17 +226,11 @@ public class MoreMaterialsMod {
         stainedBrickBlocks.registerModels();
 
         for (int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
-            /*
-            BlockStainedBrickSlab slab = new BlockStainedBrickSlab(false, i);
+            BlockStainedBrickSlab slab = new BlockHalfStainedBrickSlab(i);
             BlockStainedBrickSlab doubleSlab =
-                new BlockStainedBrickSlab(true, i);
-            ItemSlab itemSlab = new ItemSlab(slab, slab, doubleSlab);
-            ItemSlab itemDoubleSlab =
-                new ItemSlab(doubleSlab, slab, doubleSlab, true);
+                new BlockDoubleStainedBrickSlab(i);
             stainedBrickSlabBlocks[2 * i] = slab;
             stainedBrickSlabBlocks[2 * i + 1] = doubleSlab;
-            stainedBrickSlabItemBlocks[2 * i] = itemSlab;
-            stainedBrickSlabItemBlocks[2 * i + 1] = itemDoubleSlab;
             GameRegistry.registerBlock(
                 slab,
                 ItemBlockStainedBrickSlab.class,
@@ -250,14 +244,16 @@ public class MoreMaterialsMod {
                 doubleSlab.getId(),
                 slab,
                 doubleSlab,
-                true);*/
+                true);
+            slab.registerModels();
+            doubleSlab.registerModels();
 
             BlockStainedBrickStairs stairs = new BlockStainedBrickStairs(
                 stainedBrickBlocks,
                 i);
             GameRegistry.registerBlock(stairs, stairs.getId());
             stairs.registerModels();
-            // addSlabRecipes(slab, 0, stainedBrickBlocks, i);
+            addSlabRecipes(slab, 0, stainedBrickBlocks, i);
             addStairsRecipes(stairs, 0, stainedBrickBlocks, i);
         }
 
