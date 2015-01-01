@@ -13,12 +13,6 @@ import net.minecraft.item.ItemStack;
  *
  */
 public class ItemBlockWoodenFrame extends ItemBlock {
-
-    /**
-     * ID to use in the registry.
-     */
-    public static final String ID = "block_stained_bricks";
-
     /**
      * Initializes a new instance of the ItemBlockWoodenFrame class.
      * @param block the block that this item is for.

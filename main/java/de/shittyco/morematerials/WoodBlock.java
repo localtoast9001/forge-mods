@@ -11,6 +11,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -102,6 +103,24 @@ public abstract class WoodBlock extends Block {
             WoodMetadata.OAK);
         this.setDefaultState(
             state);
+    }
+
+    /**
+     * Call on init to register the icons for inventory.
+     * @param id the registered name of the block.
+     */
+    @SideOnly(Side.CLIENT)
+    protected final void registerModels(final String id) {
+        Item itemBlock = GameUtility.getItemFromBlock(id);
+        for (int i = 0; i < WoodUtility.WOOD_TYPE_COUNT; i++) {
+            ModelBakery.addVariantName(
+                itemBlock,
+                "morematerials:" + id + "_" + WoodUtility.WOOD_TYPE_IDS[i]);
+            GameUtility.registerInventoryModel(
+                itemBlock,
+                id + "_" + WoodUtility.WOOD_TYPE_IDS[i],
+                i);
+        }
     }
 
     /**

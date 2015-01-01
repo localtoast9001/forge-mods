@@ -80,6 +80,21 @@ public class MoreMaterialsMod {
     private static BlockWoodenFrame woodenFrame;
 
     /**
+     * Static cross wooden frame block for registration.
+     */
+    private static BlockCrossWoodenFrame crossWoodenFrame;
+
+    /**
+     * Static slash wooden frame block for registration.
+     */
+    private static BlockSlashWoodenFrame slashWoodenFrame;
+
+    /**
+     * Static backslash wooden frame for registration.
+     */
+    private static BlockBackslashWoodenFrame backslashWoodenFrame;
+
+    /**
      * XP gained by smelting.
      */
     private static final float SMELTINGXP = 0.1f;
@@ -317,6 +332,27 @@ public class MoreMaterialsMod {
             BlockWoodenFrame.ID);
         woodenFrame.registerModels();
 
+        crossWoodenFrame = new BlockCrossWoodenFrame();
+        GameRegistry.registerBlock(
+            crossWoodenFrame,
+            ItemBlockWoodenFrame.class,
+            BlockCrossWoodenFrame.ID);
+        crossWoodenFrame.registerModels();
+
+        slashWoodenFrame = new BlockSlashWoodenFrame();
+        GameRegistry.registerBlock(
+            slashWoodenFrame,
+            ItemBlockWoodenFrame.class,
+            BlockSlashWoodenFrame.ID);
+        slashWoodenFrame.registerModels();
+
+        backslashWoodenFrame = new BlockBackslashWoodenFrame();
+        GameRegistry.registerBlock(
+                backslashWoodenFrame,
+                ItemBlockWoodenFrame.class,
+                BlockBackslashWoodenFrame.ID);
+        backslashWoodenFrame.registerModels();
+
         ItemStack clayStack = new ItemStack(Items.clay_ball);
         ItemStack dirtStack = new ItemStack(Blocks.dirt);
         ItemStack sandStack = new ItemStack(Blocks.sand);
@@ -348,6 +384,45 @@ public class MoreMaterialsMod {
                 'x', stickStack,
                 'y', woodStack,
                 'z', singleDaubStack);
+
+            ItemStack sourceWoodenFrameStack = new ItemStack(
+                woodenFrame,
+                1,
+                i);
+            ItemStack crossWoodenFrameStack = new ItemStack(
+                crossWoodenFrame,
+                1,
+                i);
+            GameRegistry.addRecipe(
+                crossWoodenFrameStack,
+                "x x",
+                " y ",
+                "x x",
+                'x', stickStack,
+                'y', sourceWoodenFrameStack);
+
+            ItemStack slashWoodenFrameStack = new ItemStack(
+                slashWoodenFrame,
+                1,
+                i);
+            GameRegistry.addRecipe(
+                slashWoodenFrameStack,
+                "  x",
+                " x ",
+                "y  ",
+                'x', stickStack,
+                'y', sourceWoodenFrameStack);
+            ItemStack backslashWoodenFrameStack = new ItemStack(
+                backslashWoodenFrame,
+                1,
+                i);
+            GameRegistry.addRecipe(
+                backslashWoodenFrameStack,
+                "y  ",
+                " x ",
+                "  x",
+                'x', stickStack,
+                'y', sourceWoodenFrameStack);
         }
     }
 }
