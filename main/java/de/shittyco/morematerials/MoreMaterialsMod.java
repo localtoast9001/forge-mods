@@ -95,6 +95,11 @@ public class MoreMaterialsMod {
     private static BlockBackslashWoodenFrame backslashWoodenFrame;
 
     /**
+     * Thatched roofing block for registration.
+     */
+    private static BlockThatchedRoofing thatchedRoofing;
+
+    /**
      * XP gained by smelting.
      */
     private static final float SMELTINGXP = 0.1f;
@@ -141,6 +146,7 @@ public class MoreMaterialsMod {
         this.initTools();
         this.initBricks();
         this.initWattleAndDaub();
+        this.initRoofing();
     }
 
     /**
@@ -424,5 +430,30 @@ public class MoreMaterialsMod {
                 'x', stickStack,
                 'y', sourceWoodenFrameStack);
         }
+    }
+
+    /**
+     * Initializes roofing blocks.
+     */
+    private void initRoofing() {
+        thatchedRoofing = new BlockThatchedRoofing();
+        GameRegistry.registerBlock(
+            thatchedRoofing,
+            BlockThatchedRoofing.ID);
+        thatchedRoofing.registerModels();
+
+        ItemStack thatchedRoofingStack = new ItemStack(
+            thatchedRoofing,
+            STAIRS_QUANTITY,
+            0);
+
+        ItemStack hayStack = new ItemStack(Blocks.hay_block, 1, 0);
+        GameRegistry.addShapedRecipe(
+            thatchedRoofingStack,
+            "  x",
+            " xy",
+            "xyy",
+            'x', hayStack,
+            'y', Blocks.planks);
     }
 }
