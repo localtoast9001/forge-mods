@@ -3,7 +3,6 @@
  */
 package de.shittyco.morematerials;
 
-import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 
@@ -34,13 +33,14 @@ public class BlockThatchedRoofing extends BlockRoofing {
 
     /**
      * Registers models for display in the inventory.
+     * @param proxy the proxy to register the models.
      */
-    public final void registerModels() {
+    public final void registerModels(final CommonProxy proxy) {
         Item itemBlock = GameUtility.getItemFromBlock(ID);
-        ModelBakery.addVariantName(
+        proxy.addModelBakeryVariant(
             itemBlock,
             "morematerials:" + ID);
-        GameUtility.registerInventoryModel(
+        proxy.registerInventoryModel(
             itemBlock,
             ID,
             0);

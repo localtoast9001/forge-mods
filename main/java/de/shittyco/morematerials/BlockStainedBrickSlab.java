@@ -9,7 +9,6 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -204,15 +203,15 @@ public abstract class BlockStainedBrickSlab extends BlockSlab {
 
     /**
      * Call on init to register the icons for inventory.
+     * @param proxy the proxy to register the models.
      */
-    @SideOnly(Side.CLIENT)
-    public final void registerModels() {
+    public final void registerModels(final CommonProxy proxy) {
         Item itemBlock = GameUtility.getItemFromBlock(
             this.getId());
-        ModelBakery.addVariantName(
+        proxy.addModelBakeryVariant(
             itemBlock,
             "morematerials:" + this.getId());
-        GameUtility.registerInventoryModel(
+        proxy.registerInventoryModel(
             itemBlock,
             this.getId(),
             0);

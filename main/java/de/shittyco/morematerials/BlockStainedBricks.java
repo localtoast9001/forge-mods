@@ -3,11 +3,7 @@
  */
 package de.shittyco.morematerials;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
 import net.minecraft.block.material.Material;
-import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
@@ -52,16 +48,16 @@ public class BlockStainedBricks extends ColoredBlock {
 
     /**
      * Call on init to register the icons for inventory.
+     * @param proxy the proxy to register the models.
      */
-    @SideOnly(Side.CLIENT)
-    public final void registerModels() {
+    public final void registerModels(final CommonProxy proxy) {
         Item itemBlock = GameUtility.getItemFromBlock(ID);
         for (int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
-            GameUtility.registerInventoryModel(
+            proxy.registerInventoryModel(
                 itemBlock,
                 ID + "_" + ColorUtility.COLOR_IDS[i],
                 i);
-            ModelBakery.addVariantName(
+            proxy.addModelBakeryVariant(
                 itemBlock,
                 "morematerials:" + ID + "_" + ColorUtility.COLOR_IDS[i]);
         }

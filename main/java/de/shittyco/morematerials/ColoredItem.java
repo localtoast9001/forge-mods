@@ -7,12 +7,9 @@ import java.util.List;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.client.resources.model.ModelBakery;
-// import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-// import net.minecraft.util.IIcon;
 
 /**
  * A common base class for items which only have colored variants.
@@ -74,21 +71,21 @@ public abstract class ColoredItem extends Item {
 
     /**
      * Call on init to register the icons for inventory.
+     * @param proxy the proxy to register the models.
      */
-    @SideOnly(Side.CLIENT)
-    public final void registerModels() {
+    public final void registerModels(final CommonProxy proxy) {
         for (int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
             String variantName = "morematerials:"
                 + this.modelName
                 + "_"
                 + ColorUtility.COLOR_IDS[i];
-            GameUtility.registerInventoryModel(
+            proxy.registerInventoryModel(
                 this,
                 this.modelName + "_" + ColorUtility.COLOR_IDS[i],
                 i);
-            ModelBakery.addVariantName(
-                    this,
-                    variantName);
+            proxy.addModelBakeryVariant(
+                this,
+                variantName);
         }
     }
 }

@@ -5,8 +5,6 @@ package de.shittyco.morematerials;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Base class of all wooden frame variants.
@@ -48,9 +46,9 @@ public abstract class BlockBaseWoodenFrame extends WoodBlock {
 
     /**
      * Registers models for inventory.
+     * @param proxy the proxy for either client or server.
      */
-    @SideOnly(Side.CLIENT)
-    public final void registerModels() {
-        super.registerModels(this.id);
+    public final void registerModels(final CommonProxy proxy) {
+        super.registerModels(proxy, this.id);
     }
 }
