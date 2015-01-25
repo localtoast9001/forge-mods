@@ -40,7 +40,7 @@ public class MoreMaterialsMod {
      */
     @SidedProxy(
         clientSide = "de.shittyco.morematerials.ClientProxy",
-        serverSide = "de.shittyco.morematerials.CommonProxy")
+        serverSide = "de.shittyco.morematerials.ServerProxy")
     public static CommonProxy proxy;
 
     /**
