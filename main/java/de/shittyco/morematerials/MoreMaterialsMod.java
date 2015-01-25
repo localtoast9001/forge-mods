@@ -4,8 +4,10 @@
 package de.shittyco.morematerials;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStairs;
+import net.minecraft.block.BlockTallGrass;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemSlab;
@@ -33,7 +35,7 @@ public class MoreMaterialsMod {
     /**
      * Mod Version.
      */
-    public static final String VERSION = "1.0";
+    public static final String VERSION = "1.0.20150201.0";
 
     /**
      * Gets created by FML to specialize client vs. server calls.
@@ -137,6 +139,11 @@ public class MoreMaterialsMod {
      * Wooden frame quantity for crafting.
      */
     private static final int WOODEN_FRAME_QUANTITY = 8;
+
+    /**
+     * Thatched roof quantity for crafting.
+     */
+    private static final int THATCHED_ROOF_QUANTITY = 3;
 
     /**
      * Pre-initialization event handler.
@@ -371,19 +378,38 @@ public class MoreMaterialsMod {
         ItemStack clayStack = new ItemStack(Items.clay_ball);
         ItemStack dirtStack = new ItemStack(Blocks.dirt);
         ItemStack sandStack = new ItemStack(Blocks.sand);
-        ItemStack strawStack = new ItemStack(Items.wheat);
         ItemStack stickStack = new ItemStack(Items.stick);
+
+        // switched from just wheat to include other fibrous material
+        // that could be used that is available early in the game
+        // making wooden frames a viable first or second survival
+        // house.
+        Object[] fiberObjects = new Object[] {
+                new ItemStack(Items.wheat),
+                new ItemStack(Items.reeds),
+                Blocks.sapling,
+                new ItemStack(
+                    Blocks.tallgrass,
+                    1,
+                    BlockTallGrass.EnumType.GRASS.getMeta()),
+                new ItemStack(
+                    Blocks.double_plant,
+                    1,
+                    BlockDoublePlant.EnumPlantType.GRASS.getMeta())
+            };
 
         ItemStack daubStack = new ItemStack(daub, DAUB_QUANTITY);
         ItemStack singleDaubStack = new ItemStack(daub);
-        GameRegistry.addRecipe(
-            daubStack,
-            "wx",
-            "yz",
-            'w', clayStack,
-            'x', dirtStack,
-            'y', sandStack,
-            'z', strawStack);
+        for (Object fiberObject : fiberObjects) {
+            GameRegistry.addRecipe(
+                daubStack,
+                "wx",
+                "yz",
+                'w', clayStack,
+                'x', dirtStack,
+                'y', sandStack,
+                'z', fiberObject);
+        }
 
         for (int i = 0; i < WoodUtility.WOOD_TYPE_COUNT; i++) {
             ItemStack woodenFrameStack = new ItemStack(
@@ -453,16 +479,21 @@ public class MoreMaterialsMod {
 
         ItemStack thatchedRoofingStack = new ItemStack(
             thatchedRoofing,
-            STAIRS_QUANTITY,
+            THATCHED_ROOF_QUANTITY,
             0);
 
-        ItemStack hayStack = new ItemStack(Blocks.hay_block, 1, 0);
+        // switched from hay to wheat because it takes too long
+        // to get enough wheat to make hay blocks and then too long
+        // to produce enough wheat to make a decent sized roof.
+        // A player will be tempted to use stairs or wood for the
+        // roof.
+        ItemStack wheatStack = new ItemStack(Items.wheat, 1, 0);
         GameRegistry.addShapedRecipe(
             thatchedRoofingStack,
             "  x",
-            " xy",
-            "xyy",
-            'x', hayStack,
+            " xx",
+            "xxy",
+            'x', wheatStack,
             'y', Blocks.planks);
     }
 }
