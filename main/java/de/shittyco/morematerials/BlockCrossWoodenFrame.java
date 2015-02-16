@@ -19,11 +19,12 @@ public class BlockCrossWoodenFrame extends BlockBaseWoodenFrame {
      * Unlocalized name.
      */
     private static final String NAME = "crossWoodenFrame";
-    
+
     /**
      * Texture name.
      */
-    private static final String TEXTURE_NAME = "morematerials:cross_woodenframe";
+    private static final String TEXTURE_NAME =
+        "morematerials:cross_woodenframe";
 
     /**
      * Initializes a new instance of the BlockCrossWoodenFrame class.

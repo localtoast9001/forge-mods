@@ -20,11 +20,12 @@ public class BlockSlashWoodenFrame extends BlockBaseWoodenFrame {
      * Unlocalized name.
      */
     private static final String NAME = "slashWoodenFrame";
-    
+
     /**
      * Texture name.
      */
-    private static final String TEXTURE_NAME = "morematerials:slash_woodenframe";
+    private static final String TEXTURE_NAME =
+        "morematerials:slash_woodenframe";
 
     /**
      * Initializes a new instance of the BlockSlashWoodenFrame class.

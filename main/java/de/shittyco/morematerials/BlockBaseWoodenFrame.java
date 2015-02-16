@@ -94,5 +94,5 @@ public abstract class BlockBaseWoodenFrame extends WoodBlock {
             this.woodIcons[i] = iconRegister.registerIcon(
                 "planks_" + WoodUtility.WOOD_TYPE_IDS[i]);
         }
-    }    
+    }
 }

@@ -4,10 +4,8 @@
 package de.shittyco.morematerials;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStairs;
-import net.minecraft.block.BlockTallGrass;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemSlab;
@@ -34,7 +32,7 @@ public class MoreMaterialsMod {
     /**
      * Mod Version.
      */
-    public static final String VERSION = "0.9.20150201.0";
+    public static final String VERSION = "0.9.20150214.0";
 
     /**
      * Static brick clay item for registration.
@@ -72,6 +70,16 @@ public class MoreMaterialsMod {
     private static ItemSlab[] stainedBrickSlabItemBlocks;
 
     /**
+     * Stained brick walls for registration.
+     */
+    private static BlockStainedBrickWall[] stainedBrickWallBlocks;
+
+    /**
+     * Brick wall block for registration.
+     */
+    private static BlockBrickWall brickWall;
+
+    /**
      * The daub item.
      */
     private static ItemDaub daub;
@@ -105,6 +113,11 @@ public class MoreMaterialsMod {
      * Stairs quantity in crafting.
      */
     private static final int STAIRS_QUANTITY = 4;
+
+    /**
+     * Wall quantity in crafting.
+     */
+    private static final int WALL_QUANTITY = 6;
 
     /**
      * Slab quantity in crafting.
@@ -207,6 +220,36 @@ public class MoreMaterialsMod {
     }
 
     /**
+     * Adds wall recipes for a block.
+     * @param result result block
+     * @param resultMetadata result metadata or 0.
+     * @param source source block
+     * @param sourceMetadata source metadata or 0.
+     */
+    private static void addWallRecipe(
+        final BlockGenericWall result,
+        final int resultMetadata,
+        final Block source,
+        final int sourceMetadata) {
+        ItemStack resultStack = new ItemStack(
+            result,
+            WALL_QUANTITY,
+            resultMetadata);
+        ItemStack sourceStack = new ItemStack(
+            source,
+            1,
+            sourceMetadata);
+        GameRegistry.addRecipe(
+            resultStack,
+            "xxx", "xxx", "   ",
+            'x', sourceStack);
+        GameRegistry.addRecipe(
+            resultStack,
+            "   ", "xxx", "xxx",
+            'x', sourceStack);
+    }
+
+    /**
      * Initializes tool items.
      */
     private void initTools() {
@@ -226,6 +269,8 @@ public class MoreMaterialsMod {
             new BlockStainedBrickSlab[2 * ColorUtility.COLOR_COUNT];
         stainedBrickSlabItemBlocks =
             new ItemSlab[2 * ColorUtility.COLOR_COUNT];
+        stainedBrickWallBlocks =
+            new BlockStainedBrickWall[ColorUtility.COLOR_COUNT];
 
         GameRegistry.registerItem(brickClay, ItemBrickClay.ID);
         GameRegistry.registerItem(stainedBrickClay, ItemStainedBrickClay.ID);
@@ -235,6 +280,12 @@ public class MoreMaterialsMod {
                 stainedBrickBlocks,
                 ItemBlockStainedBricks.class,
                 BlockStainedBricks.ID);
+
+        brickWall = new BlockBrickWall();
+        GameRegistry.registerBlock(
+            brickWall,
+            BlockBrickWall.ID);
+        addWallRecipe(brickWall, 0, Blocks.brick_block, 0);
 
         for (int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
             BlockStainedBrickSlab slab = new BlockStainedBrickSlab(false, i);
@@ -268,6 +319,13 @@ public class MoreMaterialsMod {
             GameRegistry.registerBlock(stairs, stairs.getId());
             addSlabRecipes(slab, 0, stainedBrickBlocks, i);
             addStairsRecipes(stairs, 0, stainedBrickBlocks, i);
+
+            BlockStainedBrickWall wall = new BlockStainedBrickWall(
+                stainedBrickBlocks,
+                i);
+            stainedBrickWallBlocks[i] = wall;
+            GameRegistry.registerBlock(wall, wall.getId());
+            addWallRecipe(wall, 0, stainedBrickBlocks, i);
         }
 
         ItemStack clayStack = new ItemStack(Items.clay_ball);
@@ -327,7 +385,7 @@ public class MoreMaterialsMod {
             woodenFrame,
             ItemBlockWoodenFrame.class,
             BlockWoodenFrame.ID);
-        
+
         crossWoodenFrame = new BlockCrossWoodenFrame();
         GameRegistry.registerBlock(
             crossWoodenFrame,
@@ -369,7 +427,7 @@ public class MoreMaterialsMod {
                     1,
                     2)
             };
-        
+
         ItemStack daubStack = new ItemStack(daub, DAUB_QUANTITY);
         ItemStack singleDaubStack = new ItemStack(daub);
         for (Object fiberObject : fiberObjects) {
@@ -435,7 +493,7 @@ public class MoreMaterialsMod {
                 " x ",
                 "  x",
                 'x', stickStack,
-                'y', sourceWoodenFrameStack);            
+                'y', sourceWoodenFrameStack);
         }
     }
 }
