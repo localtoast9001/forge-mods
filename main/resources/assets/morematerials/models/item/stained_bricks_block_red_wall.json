@@ -1,0 +1,13 @@
+{
+    "parent": "morematerials:block/red_brick_wall_ns_above",
+    "display": {
+        "thirdperson": {
+            "rotation": [ 0, 0, 180 ],
+            "translation": [ 0, 1.5, -2.75 ],
+            "scale": [ 0.375, 0.375, 0.375 ]
+        },
+        "gui": {
+            "rotation": [ 0, 90, 0 ]
+        }
+    }
+}

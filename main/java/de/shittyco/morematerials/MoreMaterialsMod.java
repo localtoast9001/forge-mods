@@ -35,7 +35,7 @@ public class MoreMaterialsMod {
     /**
      * Mod Version.
      */
-    public static final String VERSION = "1.0.20150201.0";
+    public static final String VERSION = "1.0.20150301.0";
 
     /**
      * Gets created by FML to specialize client vs. server calls.
@@ -81,6 +81,16 @@ public class MoreMaterialsMod {
     private static ItemSlab[] stainedBrickSlabItemBlocks;
 
     /**
+     * Stained brick walls for registration.
+     */
+    private static BlockStainedBrickWall[] stainedBrickWallBlocks;
+
+    /**
+     * Brick wall block for registration.
+     */
+    private static BlockBrickWall brickWall;
+
+    /**
      * The daub item.
      */
     private static ItemDaub daub;
@@ -124,6 +134,11 @@ public class MoreMaterialsMod {
      * Slab quantity in crafting.
      */
     private static final int SLAB_QUANTITY = 6;
+
+    /**
+     * Wall quantity in crafting.
+     */
+    private static final int WALL_QUANTITY = 6;
 
     /**
      * Brick quantity for crafting.
@@ -227,6 +242,36 @@ public class MoreMaterialsMod {
     }
 
     /**
+     * Adds wall recipes for a block.
+     * @param result result block
+     * @param resultMetadata result metadata or 0.
+     * @param source source block
+     * @param sourceMetadata source metadata or 0.
+     */
+    private static void addWallRecipe(
+        final BlockGenericWall result,
+        final int resultMetadata,
+        final Block source,
+        final int sourceMetadata) {
+        ItemStack resultStack = new ItemStack(
+            result,
+            WALL_QUANTITY,
+            resultMetadata);
+        ItemStack sourceStack = new ItemStack(
+            source,
+            1,
+            sourceMetadata);
+        GameRegistry.addRecipe(
+            resultStack,
+            "xxx", "xxx", "   ",
+            'x', sourceStack);
+        GameRegistry.addRecipe(
+            resultStack,
+            "   ", "xxx", "xxx",
+            'x', sourceStack);
+    }
+
+    /**
      * Initializes tool items.
      */
     private void initTools() {
@@ -247,6 +292,8 @@ public class MoreMaterialsMod {
             new BlockStainedBrickSlab[2 * ColorUtility.COLOR_COUNT];
         stainedBrickSlabItemBlocks =
             new ItemSlab[2 * ColorUtility.COLOR_COUNT];
+        stainedBrickWallBlocks =
+                new BlockStainedBrickWall[ColorUtility.COLOR_COUNT];
 
         GameRegistry.registerItem(brickClay, ItemBrickClay.ID);
         proxy.registerInventoryModel(brickClay, ItemBrickClay.ID, 0);
@@ -261,6 +308,13 @@ public class MoreMaterialsMod {
                 ItemBlockStainedBricks.class,
                 BlockStainedBricks.ID);
         stainedBrickBlocks.registerModels(proxy);
+
+        brickWall = new BlockBrickWall();
+        GameRegistry.registerBlock(
+            brickWall,
+            BlockBrickWall.ID);
+        brickWall.registerModels(proxy);
+        addWallRecipe(brickWall, 0, Blocks.brick_block, 0);
 
         for (int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
             BlockStainedBrickSlab slab = new BlockHalfStainedBrickSlab(i);
@@ -292,6 +346,14 @@ public class MoreMaterialsMod {
             stairs.registerModels(proxy);
             addSlabRecipes(slab, 0, stainedBrickBlocks, i);
             addStairsRecipes(stairs, 0, stainedBrickBlocks, i);
+
+            BlockStainedBrickWall wall = new BlockStainedBrickWall(
+                stainedBrickBlocks,
+                i);
+            stainedBrickWallBlocks[i] = wall;
+            GameRegistry.registerBlock(wall, wall.getId());
+            wall.registerModels(proxy);
+            addWallRecipe(wall, 0, stainedBrickBlocks, i);
         }
 
         ItemStack clayStack = new ItemStack(Items.clay_ball);
