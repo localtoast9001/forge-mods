@@ -64,7 +64,7 @@ public abstract class BlockGenericWall extends BlockFence {
     private int sourceMetadata;
 
     /**
-     * Initializes a new instance of the BlockGenericWall.
+     * Initializes a new instance of the BlockGenericWall class.
      * @param source the material the wall is made of.
      * @param sourceMeta the metadata for the source block.
      */
@@ -74,6 +74,7 @@ public abstract class BlockGenericWall extends BlockFence {
         super(source.getMaterial());
         this.sourceBlock = source;
         this.sourceMetadata = sourceMeta;
+        setStepSound(source.stepSound);
 
         // Fence has north, south, east, west properties, but not up.
         IBlockState state = getDefaultState();

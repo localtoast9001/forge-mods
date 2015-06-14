@@ -17,6 +17,16 @@ public class BlockStainedBrickWall extends BlockGenericWall {
     private static final String NAME = "stainedBrickWall";
 
     /**
+     * Block hardness.
+     */
+    private static final float HARDNESS = 2.0f;
+
+    /**
+     * block resistance.
+     */
+    private static final float RESISTANCE = 10.0f;
+
+    /**
      * color of the bricks.
      */
     private int color;
@@ -35,6 +45,8 @@ public class BlockStainedBrickWall extends BlockGenericWall {
                 NAME
                 + "."
                 + ColorUtility.COLOR_NAMES[this.color]);
+        this.setHardness(HARDNESS);
+        this.setResistance(RESISTANCE);
     }
 
     /**
