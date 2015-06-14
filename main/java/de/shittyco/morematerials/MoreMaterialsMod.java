@@ -121,6 +121,11 @@ public class MoreMaterialsMod {
     private static BlockThatchedRoofing thatchedRoofing;
 
     /**
+     * Hardened class wall block for registration.
+     */
+    private static BlockHardenedClayWall hardenedClayWall;
+
+    /**
      * XP gained by smelting.
      */
     private static final float SMELTINGXP = 0.1f;
@@ -178,6 +183,7 @@ public class MoreMaterialsMod {
         this.initBricks();
         this.initWattleAndDaub();
         this.initRoofing();
+        this.initHardenedClay();
     }
 
     /**
@@ -557,5 +563,17 @@ public class MoreMaterialsMod {
             "xxy",
             'x', wheatStack,
             'y', Blocks.planks);
+    }
+
+    /**
+     * Initializes hardened clay blocks.
+     */
+    private void initHardenedClay() {
+        hardenedClayWall = new BlockHardenedClayWall();
+        GameRegistry.registerBlock(
+            hardenedClayWall,
+            BlockHardenedClayWall.ID);
+        hardenedClayWall.registerModels(proxy);
+        this.addWallRecipe(hardenedClayWall, 0, Blocks.hardened_clay, 0);
     }
 }
