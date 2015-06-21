@@ -80,6 +80,16 @@ public class MoreMaterialsMod {
     private static BlockBrickWall brickWall;
 
     /**
+     * Hardened class wall block for registration.
+     */
+    private static BlockHardenedClayWall hardenedClayWall;
+
+    /**
+     * Stained hardened clay wall blocks.
+     */
+    private static BlockStainedHardenedClayWall[] stainedHardenedClayWallBlocks;
+
+    /**
      * The daub item.
      */
     private static ItemDaub daub;
@@ -156,6 +166,7 @@ public class MoreMaterialsMod {
         this.initTools();
         this.initBricks();
         this.initWattleAndDaub();
+        this.initHardenedClay();
     }
 
     /**
@@ -494,6 +505,34 @@ public class MoreMaterialsMod {
                 "  x",
                 'x', stickStack,
                 'y', sourceWoodenFrameStack);
+        }
+    }
+
+    /**
+     * Initializes hardened clay blocks.
+     */
+    private void initHardenedClay() {
+        hardenedClayWall = new BlockHardenedClayWall();
+        GameRegistry.registerBlock(
+            hardenedClayWall,
+            BlockHardenedClayWall.ID);
+        this.addWallRecipe(hardenedClayWall, 0, Blocks.hardened_clay, 0);
+
+        stainedHardenedClayWallBlocks =
+            new BlockStainedHardenedClayWall[ColorUtility.COLOR_COUNT];
+        for (int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
+            BlockStainedHardenedClayWall block =
+                new BlockStainedHardenedClayWall(i);
+            stainedHardenedClayWallBlocks[i] = block;
+
+            GameRegistry.registerBlock(block, block.getId());
+
+            // NOTE: Color metadata is backwards.
+            this.addWallRecipe(
+                block,
+                0,
+                Blocks.stained_hardened_clay,
+                ColorUtility.COLOR_COUNT - i - 1);
         }
     }
 }
