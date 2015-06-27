@@ -139,3 +139,5 @@ tile.stained_hardened_clay_wall.lightBlue.name=Light Blue Stained Clay Wall
 tile.stained_hardened_clay_wall.magenta.name=Magenta Stained Clay Wall
 tile.stained_hardened_clay_wall.orange.name=Orange Stained Clay Wall
 tile.stained_hardened_clay_wall.white.name=White Stained Clay Wall
+tile.wattle_panel.name=Wattle Panel
+tile.wattle_and_daub.name=Wattle and Daub

@@ -95,6 +95,16 @@ public class MoreMaterialsMod {
     private static ItemDaub daub;
 
     /**
+     * The wattle panel block.
+     */
+    private static BlockWattlePanel wattlePanel;
+
+    /**
+     * The wattle and daub block.
+     */
+    private static BlockWattleAndDaub wattleAndDaub;
+
+    /**
      * Static wooden frame block for registration.
      */
     private static BlockWoodenFrame woodenFrame;
@@ -148,6 +158,19 @@ public class MoreMaterialsMod {
      * Wooden frame quantity for crafting.
      */
     private static final int WOODEN_FRAME_QUANTITY = 8;
+
+    /**
+     * Crafting quantity for wattle panel.
+     */
+    private static final int WATTLE_PANEL_QUANTITY = 8;
+
+    /**
+     * Gets the wattle and daub block.
+     * @return the block.
+     */
+    public static BlockWattleAndDaub getWattleAndDaub() {
+        return wattleAndDaub;
+    }
 
     /**
      * Pre-initialization event handler.
@@ -391,6 +414,16 @@ public class MoreMaterialsMod {
         daub = new ItemDaub();
         GameRegistry.registerItem(daub, ItemDaub.ID);
 
+        wattlePanel = new BlockWattlePanel();
+        GameRegistry.registerBlock(
+            wattlePanel,
+            BlockWattlePanel.ID);
+
+        wattleAndDaub = new BlockWattleAndDaub();
+        GameRegistry.registerBlock(
+            wattleAndDaub,
+            BlockWattleAndDaub.ID);
+
         woodenFrame = new BlockWoodenFrame();
         GameRegistry.registerBlock(
             woodenFrame,
@@ -506,6 +539,24 @@ public class MoreMaterialsMod {
                 'x', stickStack,
                 'y', sourceWoodenFrameStack);
         }
+
+        // The wattle panel is a window of sticks.
+        // If 6 glass blocks make 16 window panes then
+        // 6 wood blocks make 16 wattle panels, and
+        // 2 wood blocks make 4 sticks, then
+        // 6 sticks make 8 wattle panels.
+        GameRegistry.addRecipe(
+            new ItemStack(wattlePanel, WATTLE_PANEL_QUANTITY),
+            "   ",
+            "xxx",
+            "xxx",
+            'x', stickStack);
+
+        // allow wattle and daub to be crafted.
+        GameRegistry.addShapelessRecipe(
+            new ItemStack(wattleAndDaub),
+            new ItemStack(wattlePanel),
+            new ItemStack(daub));
     }
 
     /**
