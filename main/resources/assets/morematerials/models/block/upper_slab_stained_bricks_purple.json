@@ -1,0 +1,8 @@
+{
+    "parent": "block/upper_slab",
+    "textures": {
+        "bottom": "morematerials:blocks/stainedbricks_purple",
+        "top": "morematerials:blocks/stainedbricks_purple",
+        "side": "morematerials:blocks/stainedbricks_purple"
+    }
+}
