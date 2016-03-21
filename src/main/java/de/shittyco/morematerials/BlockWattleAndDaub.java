@@ -4,9 +4,11 @@
 package de.shittyco.morematerials;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * A wall made from wattle and daub.
@@ -40,7 +42,7 @@ public class BlockWattleAndDaub extends Block {
     public BlockWattleAndDaub() {
         super(Material.rock);
         this.setUnlocalizedName(NAME);
-        this.setStepSound(soundTypeStone);
+        this.setStepSound(SoundType.STONE);
         this.setCreativeTab(CreativeTabs.tabBlock);
         this.setHardness(HARDNESS);
         this.setResistance(RESISTANCE);
@@ -53,9 +55,9 @@ public class BlockWattleAndDaub extends Block {
     public final void registerModels(
         final CommonProxy proxy) {
         Item itemBlock = GameUtility.getItemFromBlock(ID);
-        proxy.addModelBakeryVariant(
+        proxy.registerItemVariants(
             itemBlock,
-            "morematerials:" + ID);
+            new ResourceLocation("morematerials:" + ID));
         proxy.registerInventoryModel(
             itemBlock,
             ID,

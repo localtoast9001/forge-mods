@@ -4,8 +4,10 @@
 package de.shittyco.morematerials;
 
 import net.minecraft.block.BlockPane;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * A wattle panel that can have daub spread over it to form
@@ -41,7 +43,7 @@ public class BlockWattlePanel extends BlockPane {
         super(Material.wood, true);
         this.setHardness(HARDNESS);
         this.setResistance(RESISTANCE);
-        this.setStepSound(soundTypeWood);
+        this.setStepSound(SoundType.WOOD);
         this.setUnlocalizedName(NAME);
     }
 
@@ -52,9 +54,9 @@ public class BlockWattlePanel extends BlockPane {
     public final void registerModels(
         final CommonProxy proxy) {
         Item itemBlock = GameUtility.getItemFromBlock(ID);
-        proxy.addModelBakeryVariant(
+        proxy.registerItemVariants(
             itemBlock,
-            "morematerials:" + ID);
+            new ResourceLocation("morematerials:" + ID));
         proxy.registerInventoryModel(
             itemBlock,
             ID,

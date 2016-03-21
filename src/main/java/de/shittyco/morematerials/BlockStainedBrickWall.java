@@ -4,6 +4,7 @@
 package de.shittyco.morematerials;
 
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Different color brick walls.
@@ -68,9 +69,9 @@ public class BlockStainedBrickWall extends BlockGenericWall {
         final CommonProxy proxy) {
         String id = this.getId();
         Item itemBlock = GameUtility.getItemFromBlock(id);
-        proxy.addModelBakeryVariant(
+        proxy.registerItemVariants(
             itemBlock,
-            "morematerials:" + id);
+            new ResourceLocation("morematerials:" + id));
         proxy.registerInventoryModel(
             itemBlock,
             id,

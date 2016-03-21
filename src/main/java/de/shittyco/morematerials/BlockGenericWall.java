@@ -8,10 +8,13 @@ import net.minecraft.block.BlockFence;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 /**
  * Customizable Wall block that supports different materials.
@@ -29,30 +32,48 @@ public abstract class BlockGenericWall extends BlockFence {
     private static final PropertyBool UP = PropertyBool.create("up");
 
     /**
-     * lower bounds for the post.
+     * Bounding boxes.
      */
-    private static final float POST_MIN = 0.25f;
-
+    private static final AxisAlignedBB[] BOUNDING_BOXES = new AxisAlignedBB[] {
+        new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D), 
+        new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 1.0D, 1.0D), 
+        new AxisAlignedBB(0.0D, 0.0D, 0.25D, 0.75D, 1.0D, 0.75D), 
+        new AxisAlignedBB(0.0D, 0.0D, 0.25D, 0.75D, 1.0D, 1.0D), 
+        new AxisAlignedBB(0.25D, 0.0D, 0.0D, 0.75D, 1.0D, 0.75D), 
+        new AxisAlignedBB(0.3125D, 0.0D, 0.0D, 0.6875D, 0.875D, 1.0D), 
+        new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.75D, 1.0D, 0.75D), 
+        new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.75D, 1.0D, 1.0D), 
+        new AxisAlignedBB(0.25D, 0.0D, 0.25D, 1.0D, 1.0D, 0.75D), 
+        new AxisAlignedBB(0.25D, 0.0D, 0.25D, 1.0D, 1.0D, 1.0D), 
+        new AxisAlignedBB(0.0D, 0.0D, 0.3125D, 1.0D, 0.875D, 0.6875D),
+        new AxisAlignedBB(0.0D, 0.0D, 0.25D, 1.0D, 1.0D, 1.0D),
+        new AxisAlignedBB(0.25D, 0.0D, 0.0D, 1.0D, 1.0D, 0.75D), 
+        new AxisAlignedBB(0.25D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D), 
+        new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 0.75D), 
+        new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)
+        };
+    
     /**
-     * upper bounds for the post.
+     * Selected bounding boxes.
      */
-    private static final float POST_MAX = 0.75f;
-
-    /**
-     * lower bounds for wall.
-     */
-    private static final float WALL_MIN = 0.3125f;
-
-    /**
-     * upper bounds for wall.
-     */
-    private static final float WALL_MAX = 0.6875f;
-
-    /**
-     * Wall height without post.
-     */
-    private static final float WALL_HEIGHT = 0.8125F;
-
+    private static final AxisAlignedBB[] SELECTED_BOUNDING_BOXES = new AxisAlignedBB[] {
+        BOUNDING_BOXES[0].setMaxY(1.5D),
+        BOUNDING_BOXES[1].setMaxY(1.5D),
+        BOUNDING_BOXES[2].setMaxY(1.5D),
+        BOUNDING_BOXES[3].setMaxY(1.5D),
+        BOUNDING_BOXES[4].setMaxY(1.5D),
+        BOUNDING_BOXES[5].setMaxY(1.5D),
+        BOUNDING_BOXES[6].setMaxY(1.5D),
+        BOUNDING_BOXES[7].setMaxY(1.5D),
+        BOUNDING_BOXES[8].setMaxY(1.5D),
+        BOUNDING_BOXES[9].setMaxY(1.5D),
+        BOUNDING_BOXES[10].setMaxY(1.5D),
+        BOUNDING_BOXES[11].setMaxY(1.5D),
+        BOUNDING_BOXES[12].setMaxY(1.5D), 
+        BOUNDING_BOXES[13].setMaxY(1.5D), 
+        BOUNDING_BOXES[14].setMaxY(1.5D), 
+        BOUNDING_BOXES[15].setMaxY(1.5D)};
+    
     /**
      * The block on which the wall is based.
      */
@@ -71,10 +92,12 @@ public abstract class BlockGenericWall extends BlockFence {
     protected BlockGenericWall(
         final Block source,
         final int sourceMeta) {
-        super(source.getMaterial());
+        super(
+            source.getMaterial(source.getDefaultState()),
+            source.getMapColor(source.getDefaultState()));
         this.sourceBlock = source;
         this.sourceMetadata = sourceMeta;
-        setStepSound(source.stepSound);
+        setStepSound(source.getStepSound());
 
         // Fence has north, south, east, west properties, but not up.
         IBlockState state = getDefaultState();
@@ -82,64 +105,37 @@ public abstract class BlockGenericWall extends BlockFence {
     }
 
     /**
-     * Updates the blocks bounds based on its current state.
-     * @param blockAccess the world.
-     * @param pos block position.
+     * Gets the bounding box.
+     * @param state the block state.
+     * @param source the source access.
+     * @param pos the block position.
+     * @return the bounding box.
      */
     @Override
-    public final void setBlockBoundsBasedOnState(
-        final IBlockAccess blockAccess,
-        final BlockPos pos) {
-        boolean north = this.canConnectTo(blockAccess, pos.north());
-        boolean south = this.canConnectTo(blockAccess, pos.south());
-        boolean west = this.canConnectTo(blockAccess, pos.west());
-        boolean east = this.canConnectTo(blockAccess, pos.east());
-        boolean up = this.canConnectUp(blockAccess, pos);
-        float f = POST_MIN;
-        float f1 = POST_MAX;
-        float f2 = POST_MIN;
-        float f3 = POST_MAX;
-        float f4 = 1.0F;
+    public final AxisAlignedBB getBoundingBox(
+        final IBlockState state, 
+        final IBlockAccess source, 
+        final BlockPos pos)
+    {
+        IBlockState actualState = this.getActualState(state, source, pos);
+        return BOUNDING_BOXES[getBoundingBoxIndex(actualState)];
+    }
 
-        if (north) {
-            f2 = 0.0F;
-        }
-
-        if (south) {
-            f3 = 1.0F;
-        }
-
-        if (west) {
-            f = 0.0F;
-        }
-
-        if (east) {
-            f1 = 1.0F;
-        }
-
-        if (north && south && !west && !east) {
-            if (up) {
-                f4 = 1.0f;
-                f = POST_MIN;
-                f1 = POST_MAX;
-            } else {
-                f4 = WALL_HEIGHT;
-                f = WALL_MIN;
-                f1 = WALL_MAX;
-            }
-        } else if (!north && !south && west && east) {
-            if (up) {
-                f4 = 1.0f;
-                f2 = POST_MIN;
-                f3 = POST_MAX;
-            } else {
-                f4 = WALL_HEIGHT;
-                f2 = WALL_MIN;
-                f3 = WALL_MAX;
-            }
-        }
-
-        this.setBlockBounds(f, 0.0F, f2, f1, f4, f3);
+    /**
+     * Gets the selected bounding box.
+     * @param blockState the block state
+     * @param worldIn the world.
+     * @param pos the block position.
+     * @return the bounding box.
+     */
+    @Override
+    public final AxisAlignedBB getSelectedBoundingBox(
+        final IBlockState blockState, 
+        final World worldIn, 
+        final BlockPos pos)
+    {
+        IBlockState actualState = this.getActualState(blockState, worldIn, pos);
+        return SELECTED_BOUNDING_BOXES[getBoundingBoxIndex(actualState)];
     }
 
     /**
@@ -160,9 +156,9 @@ public abstract class BlockGenericWall extends BlockFence {
             return true;
         }
 
-        if (block.getMaterial().isOpaque()
-            && block.isFullCube()) {
-            return block.getMaterial() != Material.gourd;
+        if (block.getMaterial(blockState).isOpaque()
+            && block.isFullCube(blockState)) {
+            return block.getMaterial(blockState) != Material.gourd;
         }
 
         return false;
@@ -201,7 +197,7 @@ public abstract class BlockGenericWall extends BlockFence {
      * Creates the empty block state.
      * @return empty block state with properties.
      */
-    protected final BlockState createBlockState() {
+    protected final BlockStateContainer createBlockState() {
         IProperty[] props = new IProperty[] {
             BlockFence.NORTH,
             BlockFence.EAST,
@@ -210,8 +206,37 @@ public abstract class BlockGenericWall extends BlockFence {
             UP
         };
 
-        return new BlockState(this, props);
+        return new BlockStateContainer(this, props);
     }
+    
+    private static int getBoundingBoxIndex(
+        final IBlockState blockState)
+    {
+        int i = 0;
+
+        if (((Boolean)blockState.getValue(NORTH)).booleanValue())
+        {
+            i |= 1 << EnumFacing.NORTH.getHorizontalIndex();
+        }
+
+        if (((Boolean)blockState.getValue(EAST)).booleanValue())
+        {
+            i |= 1 << EnumFacing.EAST.getHorizontalIndex();
+        }
+
+        if (((Boolean)blockState.getValue(SOUTH)).booleanValue())
+        {
+            i |= 1 << EnumFacing.SOUTH.getHorizontalIndex();
+        }
+
+        if (((Boolean)blockState.getValue(WEST)).booleanValue())
+        {
+            i |= 1 << EnumFacing.WEST.getHorizontalIndex();
+        }
+
+        return i;
+    }
+    
 
     /**
      * Helper for special casing torches that are on top of the wall.

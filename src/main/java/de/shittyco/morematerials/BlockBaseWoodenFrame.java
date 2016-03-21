@@ -3,6 +3,7 @@
  */
 package de.shittyco.morematerials;
 
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 
@@ -40,7 +41,7 @@ public abstract class BlockBaseWoodenFrame extends WoodBlock {
         this.setHardness(HARDNESS);
         this.setResistance(RESISTANCE);
         this.setCreativeTab(CreativeTabs.tabBlock);
-        this.setStepSound(soundTypeWood);
+        this.setStepSound(SoundType.WOOD);
         this.setUnlocalizedName(unlocalizedName);
     }
 

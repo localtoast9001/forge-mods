@@ -9,11 +9,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -71,8 +72,8 @@ public abstract class WoodBlock extends Block {
      * @return a block state with the variant property.
      */
     @Override
-    protected final BlockState createBlockState() {
-        return new BlockState(this, new IProperty[] {VARIANT_PROPERTY});
+    protected final BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, new IProperty[] {VARIANT_PROPERTY});
     }
 
     /**
@@ -113,15 +114,17 @@ public abstract class WoodBlock extends Block {
         final CommonProxy proxy,
         final String id) {
         Item itemBlock = GameUtility.getItemFromBlock(id);
+        ResourceLocation[] names = new ResourceLocation[WoodUtility.WOOD_TYPE_COUNT];
         for (int i = 0; i < WoodUtility.WOOD_TYPE_COUNT; i++) {
-            proxy.addModelBakeryVariant(
-                itemBlock,
-                "morematerials:" + id + "_" + WoodUtility.WOOD_TYPE_IDS[i]);
+            String name = "morematerials:" + id + "_" + WoodUtility.WOOD_TYPE_IDS[i];
+            names[i] = new ResourceLocation(name);
             proxy.registerInventoryModel(
                 itemBlock,
                 id + "_" + WoodUtility.WOOD_TYPE_IDS[i],
                 i);
         }
+        
+        proxy.registerItemVariants(itemBlock, names);
     }
 
     /**

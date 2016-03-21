@@ -6,6 +6,7 @@ package de.shittyco.morematerials;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Stained brick stairs.
@@ -59,9 +60,9 @@ public class BlockStainedBrickStairs extends BlockStairs {
     public final void registerModels(final CommonProxy proxy) {
         Item itemBlock = GameUtility.getItemFromBlock(
             this.getId());
-        proxy.addModelBakeryVariant(
+        proxy.registerItemVariants(
             itemBlock,
-            "morematerials:" + this.getId());
+            new ResourceLocation("morematerials:" + this.getId()));
         proxy.registerInventoryModel(
             itemBlock,
             this.getId(),

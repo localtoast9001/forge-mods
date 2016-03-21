@@ -3,9 +3,11 @@
  */
 package de.shittyco.morematerials;
 
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Stained Brick Blocks.
@@ -41,7 +43,7 @@ public class BlockStainedBricks extends ColoredBlock {
         super(Material.rock);
         setHardness(HARDNESS);
         setResistance(RESISTANCE);
-        setStepSound(soundTypePiston);
+        setStepSound(SoundType.STONE);
         setUnlocalizedName(NAME);
         setCreativeTab(CreativeTabs.tabBlock);
     }
@@ -52,14 +54,17 @@ public class BlockStainedBricks extends ColoredBlock {
      */
     public final void registerModels(final CommonProxy proxy) {
         Item itemBlock = GameUtility.getItemFromBlock(ID);
+        ResourceLocation[] names = new ResourceLocation[ColorUtility.COLOR_COUNT];
         for (int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
             proxy.registerInventoryModel(
                 itemBlock,
                 ID + "_" + ColorUtility.COLOR_IDS[i],
                 i);
-            proxy.addModelBakeryVariant(
-                itemBlock,
-                "morematerials:" + ID + "_" + ColorUtility.COLOR_IDS[i]);
+            String name = 
+                "morematerials:" + ID + "_" + ColorUtility.COLOR_IDS[i];
+            names[i] = new ResourceLocation(name);
         }
+        
+        proxy.registerItemVariants(itemBlock, names);
     }
 }

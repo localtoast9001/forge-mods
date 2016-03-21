@@ -5,6 +5,7 @@ package de.shittyco.morematerials;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Clay walls stained with different colors.
@@ -64,9 +65,9 @@ public class BlockStainedHardenedClayWall extends BlockGenericWall {
         final CommonProxy proxy) {
         String id = this.getId();
         Item itemBlock = GameUtility.getItemFromBlock(id);
-        proxy.addModelBakeryVariant(
+        proxy.registerItemVariants(
             itemBlock,
-            "morematerials:" + id);
+            new ResourceLocation("morematerials:" + id));
         proxy.registerInventoryModel(
             itemBlock,
             id,

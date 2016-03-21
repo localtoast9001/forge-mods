@@ -4,6 +4,7 @@
 package de.shittyco.morematerials;
 
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLLog;
 
 /**
@@ -38,18 +39,19 @@ public class ServerProxy extends CommonProxy {
     }
 
     /**
-     * Helper to add a model variant in the ModelBakery.
+     * Helper to add model variants to the ModelBakery.
      * @param item the main item.
-     * @param variantName the variant name.
+     * @param names the variant names.
      */
     @Override
-    public final void addModelBakeryVariant(
-        final Item item,
-        final String variantName) {
-        FMLLog.fine(
-            "Registering model bakery variant %s for model %s. no-op.",
-            variantName,
-            item.getUnlocalizedName());
+    public final void registerItemVariants(
+        final Item item, 
+        final ResourceLocation... names) {
+        for (ResourceLocation variantName : names) {
+            FMLLog.fine(
+                "Registering model bakery variant %s for model %s. no-op.",
+                variantName,
+                item.getUnlocalizedName());
+        }
     }
-
 }

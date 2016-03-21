@@ -5,6 +5,7 @@ package de.shittyco.morematerials;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Brick wall block.
@@ -49,9 +50,9 @@ public class BlockBrickWall extends BlockGenericWall {
     public final void registerModels(
         final CommonProxy proxy) {
         Item itemBlock = GameUtility.getItemFromBlock(ID);
-        proxy.addModelBakeryVariant(
+        proxy.registerItemVariants(
             itemBlock,
-            "morematerials:" + ID);
+            new ResourceLocation("morematerials:" + ID));
         proxy.registerInventoryModel(
             itemBlock,
             ID,

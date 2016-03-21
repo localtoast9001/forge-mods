@@ -4,14 +4,16 @@
 package de.shittyco.morematerials;
 
 import net.minecraft.block.BlockSlab;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -69,7 +71,7 @@ public abstract class BlockStainedBrickSlab extends BlockSlab {
         this.useNeighborBrightness = !this.isDouble();
         setHardness(HARDNESS);
         setResistance(RESISTANCE);
-        setStepSound(soundTypePiston);
+        setStepSound(SoundType.STONE);
         setUnlocalizedName(NAME + '_' + ColorUtility.COLOR_NAMES[this.color]);
         if (!this.isDouble()) {
             setCreativeTab(CreativeTabs.tabBlock);
@@ -105,10 +107,10 @@ public abstract class BlockStainedBrickSlab extends BlockSlab {
     /**
      * Gets the value of the variant property based on the item.
      * @param itemStack item stack.
-     * @return the variant value null.
+     * @return the variant value false.
      */
     @Override
-    public final Object getVariant(final ItemStack itemStack) {
+    public final Comparable<?> getTypeForItem(final ItemStack stack) {
         return false;
     }
 
@@ -187,30 +189,15 @@ public abstract class BlockStainedBrickSlab extends BlockSlab {
     }
 
     /**
-     * Gets the item dropped when the block is broken.
-     * @param world the world
-     * @param blockPos the block position.
-     * @return the item dropped, the half slab.
-     */
-    @SideOnly(Side.CLIENT)
-    @Override
-    public final net.minecraft.item.Item getItem(
-        final net.minecraft.world.World world,
-        final net.minecraft.util.BlockPos blockPos) {
-        String blockId = this.innerGetId(false);
-        return GameUtility.getItemFromBlock(blockId);
-    }
-
-    /**
      * Call on init to register the icons for inventory.
      * @param proxy the proxy to register the models.
      */
     public final void registerModels(final CommonProxy proxy) {
         Item itemBlock = GameUtility.getItemFromBlock(
             this.getId());
-        proxy.addModelBakeryVariant(
+        proxy.registerItemVariants(
             itemBlock,
-            "morematerials:" + this.getId());
+            new ResourceLocation("morematerials:" + this.getId()));
         proxy.registerInventoryModel(
             itemBlock,
             this.getId(),
@@ -222,11 +209,11 @@ public abstract class BlockStainedBrickSlab extends BlockSlab {
      * @return the block state with properties defined.
      */
     @Override
-    protected final BlockState createBlockState() {
+    protected final BlockStateContainer createBlockState() {
         if (this.isDouble()) {
-            return new BlockState(this, new IProperty[] {VARIANT_PROPERTY});
+            return new BlockStateContainer(this, new IProperty[] {VARIANT_PROPERTY});
         } else {
-            return new BlockState(
+            return new BlockStateContainer(
                 this,
                 new IProperty[] {VARIANT_PROPERTY, HALF});
         }

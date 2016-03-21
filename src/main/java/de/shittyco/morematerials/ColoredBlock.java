@@ -9,7 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -70,8 +70,8 @@ public abstract class ColoredBlock extends Block {
      * @return a block state with the variant property.
      */
     @Override
-    protected final BlockState createBlockState() {
-        return new BlockState(this, new IProperty[] {VARIANT_PROPERTY});
+    protected final BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, new IProperty[] {VARIANT_PROPERTY});
     }
 
     /**
