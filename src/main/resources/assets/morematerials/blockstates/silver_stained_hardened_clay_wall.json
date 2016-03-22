@@ -1,36 +1,19 @@
 {
-    "variants": {
-        "east=false,north=false,south=false,up=false,west=false": { "model": "morematerials:stained_hardened_clay_wall_post_silver" },
-        "east=false,north=true,south=false,up=false,west=false":  { "model": "morematerials:stained_hardened_clay_wall_n_silver" },
-        "east=true,north=false,south=false,up=false,west=false":  { "model": "morematerials:stained_hardened_clay_wall_n_silver", "y": 90, "uvlock": true },
-        "east=false,north=false,south=true,up=false,west=false":  { "model": "morematerials:stained_hardened_clay_wall_n_silver", "y": 180, "uvlock": true },
-        "east=false,north=false,south=false,up=false,west=true":  { "model": "morematerials:stained_hardened_clay_wall_n_silver", "y": 270, "uvlock": true },
-        "east=true,north=true,south=false,up=false,west=false":   { "model": "morematerials:stained_hardened_clay_wall_ne_silver" },
-        "east=true,north=false,south=true,up=false,west=false":   { "model": "morematerials:stained_hardened_clay_wall_ne_silver", "y": 90, "uvlock": true },
-        "east=false,north=false,south=true,up=false,west=true":   { "model": "morematerials:stained_hardened_clay_wall_ne_silver", "y": 180, "uvlock": true },
-        "east=false,north=true,south=false,up=false,west=true":   { "model": "morematerials:stained_hardened_clay_wall_ne_silver", "y": 270, "uvlock": true },
-        "east=false,north=true,south=true,up=false,west=false":   { "model": "morematerials:stained_hardened_clay_wall_ns_silver" },
-        "east=true,north=false,south=false,up=false,west=true":   { "model": "morematerials:stained_hardened_clay_wall_ns_silver", "y": 90, "uvlock": true },
-        "east=true,north=true,south=true,up=false,west=false":    { "model": "morematerials:stained_hardened_clay_wall_nse_silver" },
-        "east=true,north=false,south=true,up=false,west=true":    { "model": "morematerials:stained_hardened_clay_wall_nse_silver", "y": 90, "uvlock": true },
-        "east=false,north=true,south=true,up=false,west=true":    { "model": "morematerials:stained_hardened_clay_wall_nse_silver", "y": 180, "uvlock": true },
-        "east=true,north=true,south=false,up=false,west=true":    { "model": "morematerials:stained_hardened_clay_wall_nse_silver", "y": 270, "uvlock": true },
-        "east=true,north=true,south=true,up=false,west=true":     { "model": "morematerials:stained_hardened_clay_wall_nsew_silver" },
-        "east=false,north=false,south=false,up=true,west=false":  { "model": "morematerials:stained_hardened_clay_wall_post_silver" },
-        "east=false,north=true,south=false,up=true,west=false":   { "model": "morematerials:stained_hardened_clay_wall_n_silver" },
-        "east=true,north=false,south=false,up=true,west=false":   { "model": "morematerials:stained_hardened_clay_wall_n_silver", "y": 90, "uvlock": true },
-        "east=false,north=false,south=true,up=true,west=false":   { "model": "morematerials:stained_hardened_clay_wall_n_silver", "y": 180, "uvlock": true },
-        "east=false,north=false,south=false,up=true,west=true":   { "model": "morematerials:stained_hardened_clay_wall_n_silver", "y": 270, "uvlock": true },
-        "east=true,north=true,south=false,up=true,west=false":    { "model": "morematerials:stained_hardened_clay_wall_ne_silver" },
-        "east=true,north=false,south=true,up=true,west=false":    { "model": "morematerials:stained_hardened_clay_wall_ne_silver", "y": 90, "uvlock": true },
-        "east=false,north=false,south=true,up=true,west=true":    { "model": "morematerials:stained_hardened_clay_wall_ne_silver", "y": 180, "uvlock": true },
-        "east=false,north=true,south=false,up=true,west=true":    { "model": "morematerials:stained_hardened_clay_wall_ne_silver", "y": 270, "uvlock": true },
-        "east=false,north=true,south=true,up=true,west=false":    { "model": "morematerials:stained_hardened_clay_wall_ns_above_silver" },
-        "east=true,north=false,south=false,up=true,west=true":    { "model": "morematerials:stained_hardened_clay_wall_ns_above_silver", "y": 90, "uvlock": true },
-        "east=true,north=true,south=true,up=true,west=false":     { "model": "morematerials:stained_hardened_clay_wall_nse_silver" },
-        "east=true,north=false,south=true,up=true,west=true":     { "model": "morematerials:stained_hardened_clay_wall_nse_silver", "y": 90, "uvlock": true },
-        "east=false,north=true,south=true,up=true,west=true":     { "model": "morematerials:stained_hardened_clay_wall_nse_silver", "y": 180, "uvlock": true },
-        "east=true,north=true,south=false,up=true,west=true":     { "model": "morematerials:stained_hardened_clay_wall_nse_silver", "y": 270, "uvlock": true },
-        "east=true,north=true,south=true,up=true,west=true":      { "model": "morematerials:stained_hardened_clay_wall_nsew_silver" }
-    }
+    "multipart": [
+        {   "when": { "up": "true" },
+            "apply": { "model": "morematerials:silver_stained_hardened_clay_wall_post" }
+        },
+        {   "when": { "north": "true" },
+            "apply": { "model": "morematerials:silver_stained_hardened_clay_wall_side", "uvlock": true }
+        },
+        {   "when": { "east": "true" },
+            "apply": { "model": "morematerials:silver_stained_hardened_clay_wall_side", "y": 90, "uvlock": true }
+        },
+        {   "when": { "south": "true" },
+            "apply": { "model": "morematerials:silver_stained_hardened_clay_wall_side", "y": 180, "uvlock": true }
+        },
+        {   "when": { "west": "true" },
+            "apply": { "model": "morematerials:silver_stained_hardened_clay_wall_side", "y": 270, "uvlock": true }
+        }
+    ]
 }

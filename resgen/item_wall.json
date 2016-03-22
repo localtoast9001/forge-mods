@@ -1,0 +1,3 @@
+{
+    "parent": "morematerials:block/$(TYPE)_wall_inventory"
+}

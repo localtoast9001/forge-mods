@@ -176,20 +176,27 @@ public abstract class BlockGenericWall extends BlockFence {
         final IBlockAccess blockAccess,
         final BlockPos pos) {
         boolean isUp = this.canConnectUp(blockAccess, pos);
+        boolean isNorth = this.canConnectTo(blockAccess, pos.north());
+        boolean isSouth = this.canConnectTo(blockAccess, pos.south());
+        boolean isWest = this.canConnectTo(blockAccess, pos.west());
+        boolean isEast = this.canConnectTo(blockAccess, pos.east());
+        boolean hasPost = isUp 
+            || !(isNorth && isSouth && !isEast && !isWest 
+                || isEast && isWest && !isNorth && !isSouth);
         return state
             .withProperty(
                 BlockFence.NORTH,
-                this.canConnectTo(blockAccess, pos.north()))
+                isNorth)
             .withProperty(
                 BlockFence.SOUTH,
-                this.canConnectTo(blockAccess, pos.south()))
+                isSouth)
             .withProperty(
                 BlockFence.WEST,
-                this.canConnectTo(blockAccess, pos.west()))
+                isWest)
             .withProperty(
                 BlockFence.EAST,
-                this.canConnectTo(blockAccess, pos.east()))
-            .withProperty(UP, isUp);
+                isEast)
+            .withProperty(UP, hasPost);
     }
 
     /**
@@ -208,6 +215,11 @@ public abstract class BlockGenericWall extends BlockFence {
         return new BlockStateContainer(this, props);
     }
     
+    /**
+     * Gets the index into the bounding box table given the block state.
+     * @param blockState the block state.
+     * @return the index into the bounding box table.
+     */
     private static int getBoundingBoxIndex(
         final IBlockState blockState) {
         int index = 0;
