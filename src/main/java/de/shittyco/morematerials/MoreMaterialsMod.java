@@ -1,6 +1,7 @@
 /**
  * Copyright (C) Jon Rowlett. All rights reserved.
  */
+
 package de.shittyco.morematerials;
 
 import net.minecraft.block.Block;
@@ -500,17 +501,17 @@ public class MoreMaterialsMod {
         // making wooden frames a viable first or second survival
         // house.
         Object[] fiberObjects = new Object[] {
-                new ItemStack(Items.wheat),
-                new ItemStack(Items.reeds),
-                Blocks.sapling,
-                new ItemStack(
-                    Blocks.tallgrass,
-                    1,
-                    BlockTallGrass.EnumType.GRASS.getMeta()),
-                new ItemStack(
-                    Blocks.double_plant,
-                    1,
-                    BlockDoublePlant.EnumPlantType.GRASS.getMeta())
+            new ItemStack(Items.wheat),
+            new ItemStack(Items.reeds),
+            Blocks.sapling,
+            new ItemStack(
+                Blocks.tallgrass,
+                1,
+                BlockTallGrass.EnumType.GRASS.getMeta()),
+            new ItemStack(
+                Blocks.double_plant,
+                1,
+                BlockDoublePlant.EnumPlantType.GRASS.getMeta())
             };
 
         ItemStack daubStack = new ItemStack(daub, DAUB_QUANTITY);

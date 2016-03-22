@@ -1,6 +1,7 @@
 /**
  * Copyright (C) Jon Rowlett. All rights reserved.
  */
+
 package de.shittyco.morematerials;
 
 import net.minecraft.block.Block;
@@ -19,10 +20,10 @@ import net.minecraft.world.World;
 /**
  * Customizable Wall block that supports different materials.
  * BlockWall in Minecraft is not extensible.
- * @author jrowlett
  * Fun fact: In 1.8, torch placement is hard-coded, so new wall types have to
  * derive from fences. Torch placement is kind of important because it keeps
  * monsters from spawning.
+ * @author jrowlett
  */
 public abstract class BlockGenericWall extends BlockFence {
 
@@ -115,8 +116,7 @@ public abstract class BlockGenericWall extends BlockFence {
     public final AxisAlignedBB getBoundingBox(
         final IBlockState state, 
         final IBlockAccess source, 
-        final BlockPos pos)
-    {
+        final BlockPos pos) {
         IBlockState actualState = this.getActualState(state, source, pos);
         return BOUNDING_BOXES[getBoundingBoxIndex(actualState)];
     }
@@ -132,8 +132,7 @@ public abstract class BlockGenericWall extends BlockFence {
     public final AxisAlignedBB getSelectedBoundingBox(
         final IBlockState blockState, 
         final World worldIn, 
-        final BlockPos pos)
-    {
+        final BlockPos pos) {
         IBlockState actualState = this.getActualState(blockState, worldIn, pos);
         return SELECTED_BOUNDING_BOXES[getBoundingBoxIndex(actualState)];
     }
@@ -210,31 +209,26 @@ public abstract class BlockGenericWall extends BlockFence {
     }
     
     private static int getBoundingBoxIndex(
-        final IBlockState blockState)
-    {
-        int i = 0;
+        final IBlockState blockState) {
+        int index = 0;
 
-        if (((Boolean)blockState.getValue(NORTH)).booleanValue())
-        {
-            i |= 1 << EnumFacing.NORTH.getHorizontalIndex();
+        if (((Boolean)blockState.getValue(NORTH)).booleanValue()) {
+            index |= 1 << EnumFacing.NORTH.getHorizontalIndex();
         }
 
-        if (((Boolean)blockState.getValue(EAST)).booleanValue())
-        {
-            i |= 1 << EnumFacing.EAST.getHorizontalIndex();
+        if (((Boolean)blockState.getValue(EAST)).booleanValue()) {
+            index |= 1 << EnumFacing.EAST.getHorizontalIndex();
         }
 
-        if (((Boolean)blockState.getValue(SOUTH)).booleanValue())
-        {
-            i |= 1 << EnumFacing.SOUTH.getHorizontalIndex();
+        if (((Boolean)blockState.getValue(SOUTH)).booleanValue()) {
+            index |= 1 << EnumFacing.SOUTH.getHorizontalIndex();
         }
 
-        if (((Boolean)blockState.getValue(WEST)).booleanValue())
-        {
-            i |= 1 << EnumFacing.WEST.getHorizontalIndex();
+        if (((Boolean)blockState.getValue(WEST)).booleanValue()) {
+            index |= 1 << EnumFacing.WEST.getHorizontalIndex();
         }
 
-        return i;
+        return index;
     }
     
 

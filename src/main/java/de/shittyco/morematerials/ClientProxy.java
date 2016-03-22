@@ -1,6 +1,7 @@
 /**
  * Copyright (C) Jon Rowlett. All rights reserved.
  */
+
 package de.shittyco.morematerials;
 
 import net.minecraft.client.Minecraft;
@@ -22,7 +23,7 @@ public class ClientProxy extends CommonProxy {
     public ClientProxy() {
         super();
         FMLLog.fine("Created ClientProxy");
-        }
+    }
 
     /**
      * Helper to register an item model for rendering.

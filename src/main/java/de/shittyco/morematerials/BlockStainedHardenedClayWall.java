@@ -1,6 +1,7 @@
 /**
  * Copyright (C) Jon Rowlett. All rights reserved.
  */
+
 package de.shittyco.morematerials;
 
 import net.minecraft.init.Blocks;
@@ -53,8 +54,8 @@ public class BlockStainedHardenedClayWall extends BlockGenericWall {
      * @return the unique name of the block.
      */
     public final String getId() {
-       return ColorUtility.COLOR_IDS[this.color]
-           + "_stained_hardened_clay_wall";
+        return ColorUtility.COLOR_IDS[this.color]
+            + "_stained_hardened_clay_wall";
     }
 
     /**

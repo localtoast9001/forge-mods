@@ -1,6 +1,7 @@
 /**
  * Copyright (C) Jon Rowlett. All rights reserved.
  */
+
 package de.shittyco.morematerials;
 
 import net.minecraft.block.BlockSlab;
@@ -106,7 +107,7 @@ public abstract class BlockStainedBrickSlab extends BlockSlab {
 
     /**
      * Gets the value of the variant property based on the item.
-     * @param itemStack item stack.
+     * @param stack item stack.
      * @return the variant value false.
      */
     @Override
@@ -152,7 +153,7 @@ public abstract class BlockStainedBrickSlab extends BlockSlab {
     @Override
     public final int getMetaFromState(final IBlockState state) {
         if (this.isDouble()) {
-           return 0;
+            return 0;
         }
 
         if ((EnumBlockHalf) state.getValue(HALF) == EnumBlockHalf.TOP) {

@@ -1,9 +1,8 @@
 /**
  * Copyright (C) Jon Rowlett. All rights reserved.
  */
-package de.shittyco.morematerials;
 
-import java.util.List;
+package de.shittyco.morematerials;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -16,6 +15,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 /**
  * Base class of blocks that have variants based on color only.
