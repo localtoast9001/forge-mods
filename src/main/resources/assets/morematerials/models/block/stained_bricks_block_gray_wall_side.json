@@ -1,0 +1,6 @@
+{
+    "parent": "block/wall_side",
+    "textures": {
+        "wall": "morematerials:blocks/stainedbricks_gray"
+    }
+}

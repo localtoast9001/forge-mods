@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=bottom,variant=false": { "model": "morematerials:half_slab_stained_bricks_green" },
+        "half=top,variant=false": { "model": "morematerials:upper_slab_stained_bricks_green" }
+    }
+}

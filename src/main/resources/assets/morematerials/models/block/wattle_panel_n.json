@@ -1,0 +1,7 @@
+{
+    "parent": "block/pane_n",
+    "textures": {
+        "edge": "morematerials:blocks/wattle",
+        "pane": "morematerials:blocks/wattle"
+    }
+}

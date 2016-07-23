@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "blocks/planks_jungle",
+        "side": "morematerials:blocks/cross_woodenframe_jungle"
+    }
+}

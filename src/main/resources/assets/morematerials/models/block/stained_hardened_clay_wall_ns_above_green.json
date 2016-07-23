@@ -1,0 +1,6 @@
+{
+    "parent": "block/wall_ns_above",
+    "textures": {
+        "wall": "blocks/hardened_clay_stained_green"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "parent": "block/half_slab",
+    "textures": {
+        "bottom": "morematerials:blocks/stainedbricks_black",
+        "top": "morematerials:blocks/stainedbricks_black",
+        "side": "morematerials:blocks/stainedbricks_black"
+    }
+}

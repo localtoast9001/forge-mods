@@ -1,0 +1,6 @@
+{
+    "parent": "block/wall_inventory",
+    "textures": {
+        "wall": "morematerials:blocks/stainedbricks_light_blue"
+    }
+}
