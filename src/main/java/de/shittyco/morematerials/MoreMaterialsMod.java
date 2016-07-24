@@ -36,7 +36,7 @@ public class MoreMaterialsMod {
     /**
      * Mod Version.
      */
-    public static final String VERSION = "1.9.4-1.9.20160723.0";
+    public static final String VERSION = "1.10.2-1.9.20160723.0";
 
     /**
      * Gets created by FML to specialize client vs. server calls.
