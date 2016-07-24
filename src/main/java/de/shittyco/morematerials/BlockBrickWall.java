@@ -38,7 +38,7 @@ public class BlockBrickWall extends BlockGenericWall {
      * Initializes a new instance of the BlockBrickWall class.
      */
     public BlockBrickWall() {
-        super(Blocks.brick_block, 0);
+        super(Blocks.BRICK_BLOCK, 0);
         this.setUnlocalizedName(NAME);
         this.setHardness(HARDNESS);
         this.setResistance(RESISTANCE);

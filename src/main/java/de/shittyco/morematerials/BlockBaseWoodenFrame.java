@@ -37,12 +37,12 @@ public abstract class BlockBaseWoodenFrame extends WoodBlock {
     protected BlockBaseWoodenFrame(
         final String registeredBlockId,
         final String unlocalizedName) {
-        super(Material.wood);
+        super(Material.WOOD);
         this.id = registeredBlockId;
         this.setHardness(HARDNESS);
         this.setResistance(RESISTANCE);
-        this.setCreativeTab(CreativeTabs.tabBlock);
-        this.setStepSound(SoundType.WOOD);
+        this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+        this.setSoundType(SoundType.WOOD);
         this.setUnlocalizedName(unlocalizedName);
     }
 

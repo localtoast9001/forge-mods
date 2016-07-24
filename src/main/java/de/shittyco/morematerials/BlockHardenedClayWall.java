@@ -38,7 +38,7 @@ public class BlockHardenedClayWall extends BlockGenericWall {
      * Initializes a new instance of the HardenedClayWall class.
      */
     public BlockHardenedClayWall() {
-        super(Blocks.hardened_clay, 0);
+        super(Blocks.HARDENED_CLAY, 0);
         setUnlocalizedName(NAME);
         this.setHardness(HARDNESS);
         this.setResistance(RESISTANCE);

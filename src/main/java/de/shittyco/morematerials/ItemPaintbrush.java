@@ -41,6 +41,6 @@ public class ItemPaintbrush extends Item {
         setUnlocalizedName(NAME);
         setMaxStackSize(MAXSTACKSIZE);
         setMaxDamage(MAXDAMAGE);
-        setCreativeTab(CreativeTabs.tabTools);
+        setCreativeTab(CreativeTabs.TOOLS);
     }
 }

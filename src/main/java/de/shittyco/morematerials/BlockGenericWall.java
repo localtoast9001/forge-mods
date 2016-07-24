@@ -98,7 +98,7 @@ public abstract class BlockGenericWall extends BlockFence {
             source.getMapColor(source.getDefaultState()));
         this.sourceBlock = source;
         this.sourceMetadata = sourceMeta;
-        setStepSound(source.getStepSound());
+        this.setSoundType(source.getSoundType());
 
         // Fence has north, south, east, west properties, but not up.
         IBlockState state = getDefaultState();
@@ -157,7 +157,7 @@ public abstract class BlockGenericWall extends BlockFence {
 
         if (block.getMaterial(blockState).isOpaque()
             && block.isFullCube(blockState)) {
-            return block.getMaterial(blockState) != Material.gourd;
+            return block.getMaterial(blockState) != Material.GOURD;
         }
 
         return false;

@@ -28,6 +28,6 @@ public class ItemStainedBrickClay extends ColoredItem {
      */
     public ItemStainedBrickClay() {
         super(NAME, ID);
-        setCreativeTab(CreativeTabs.tabMaterials);
+        setCreativeTab(CreativeTabs.MATERIALS);
     }
 }

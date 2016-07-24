@@ -36,7 +36,7 @@ public class MoreMaterialsMod {
     /**
      * Mod Version.
      */
-    public static final String VERSION = "1.0.20150301.0";
+    public static final String VERSION = "1.9.4-1.9.20160723.0";
 
     /**
      * Gets created by FML to specialize client vs. server calls.
@@ -349,7 +349,7 @@ public class MoreMaterialsMod {
             brickWall,
             BlockBrickWall.ID);
         brickWall.registerModels(proxy);
-        addWallRecipe(brickWall, 0, Blocks.brick_block, 0);
+        addWallRecipe(brickWall, 0, Blocks.BRICK_BLOCK, 0);
 
         for (int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
             BlockStainedBrickSlab slab = new BlockHalfStainedBrickSlab(i);
@@ -391,11 +391,11 @@ public class MoreMaterialsMod {
             addWallRecipe(wall, 0, stainedBrickBlocks, i);
         }
 
-        ItemStack clayStack = new ItemStack(Items.clay_ball);
-        ItemStack dirtStack = new ItemStack(Blocks.dirt);
-        ItemStack sandStack = new ItemStack(Blocks.sand);
-        ItemStack woolStack = new ItemStack(Blocks.wool);
-        ItemStack stickStack = new ItemStack(Items.stick);
+        ItemStack clayStack = new ItemStack(Items.CLAY_BALL);
+        ItemStack dirtStack = new ItemStack(Blocks.DIRT);
+        ItemStack sandStack = new ItemStack(Blocks.SAND);
+        ItemStack woolStack = new ItemStack(Blocks.WOOL);
+        ItemStack stickStack = new ItemStack(Items.STICK);
         GameRegistry.addRecipe(
             new ItemStack(brickClay, BRICK_QUANTITY),
             "xy", "zx",
@@ -407,10 +407,10 @@ public class MoreMaterialsMod {
             "x ", "y ", 'x', woolStack, 'y', stickStack);
         GameRegistry.addSmelting(
             brickClay,
-            new ItemStack(Items.brick),
+            new ItemStack(Items.BRICK),
             SMELTINGXP);
         for (int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
-            ItemStack dye = new ItemStack(Items.dye, 1, i);
+            ItemStack dye = new ItemStack(Items.DYE, 1, i);
             ItemStack brickClayStack = new ItemStack(brickClay, 1);
             GameRegistry.addRecipe(
                 new ItemStack(stainedBrickClay, BRICK_QUANTITY, i),
@@ -491,25 +491,25 @@ public class MoreMaterialsMod {
      * Initializes recipes that use wattle and daub.
      */
     private void initWattleAndDaubRecipes() {
-        ItemStack clayStack = new ItemStack(Items.clay_ball);
-        ItemStack dirtStack = new ItemStack(Blocks.dirt);
-        ItemStack sandStack = new ItemStack(Blocks.sand);
-        ItemStack stickStack = new ItemStack(Items.stick);
+        ItemStack clayStack = new ItemStack(Items.CLAY_BALL);
+        ItemStack dirtStack = new ItemStack(Blocks.DIRT);
+        ItemStack sandStack = new ItemStack(Blocks.SAND);
+        ItemStack stickStack = new ItemStack(Items.STICK);
 
         // switched from just wheat to include other fibrous material
         // that could be used that is available early in the game
         // making wooden frames a viable first or second survival
         // house.
         Object[] fiberObjects = new Object[] {
-            new ItemStack(Items.wheat),
-            new ItemStack(Items.reeds),
-            Blocks.sapling,
+            new ItemStack(Items.WHEAT),
+            new ItemStack(Items.REEDS),
+            Blocks.SAPLING,
             new ItemStack(
-                Blocks.tallgrass,
+                Blocks.TALLGRASS,
                 1,
                 BlockTallGrass.EnumType.GRASS.getMeta()),
             new ItemStack(
-                Blocks.double_plant,
+                Blocks.DOUBLE_PLANT,
                 1,
                 BlockDoublePlant.EnumPlantType.GRASS.getMeta())
             };
@@ -532,7 +532,7 @@ public class MoreMaterialsMod {
                 woodenFrame,
                 WOODEN_FRAME_QUANTITY,
                 i);
-            ItemStack woodStack = new ItemStack(Blocks.planks, 1, i);
+            ItemStack woodStack = new ItemStack(Blocks.PLANKS, 1, i);
             GameRegistry.addRecipe(
                 woodenFrameStack,
                 "xyx",
@@ -621,14 +621,14 @@ public class MoreMaterialsMod {
         // to produce enough wheat to make a decent sized roof.
         // A player will be tempted to use stairs or wood for the
         // roof.
-        ItemStack wheatStack = new ItemStack(Items.wheat, 1, 0);
+        ItemStack wheatStack = new ItemStack(Items.WHEAT, 1, 0);
         GameRegistry.addShapedRecipe(
             thatchedRoofingStack,
             "  x",
             " xx",
             "xxy",
             'x', wheatStack,
-            'y', Blocks.planks);
+            'y', Blocks.PLANKS);
     }
 
     /**
@@ -640,7 +640,7 @@ public class MoreMaterialsMod {
             hardenedClayWall,
             BlockHardenedClayWall.ID);
         hardenedClayWall.registerModels(proxy);
-        this.addWallRecipe(hardenedClayWall, 0, Blocks.hardened_clay, 0);
+        this.addWallRecipe(hardenedClayWall, 0, Blocks.HARDENED_CLAY, 0);
 
         stainedHardenedClayWallBlocks =
             new BlockStainedHardenedClayWall[ColorUtility.COLOR_COUNT];
@@ -656,7 +656,7 @@ public class MoreMaterialsMod {
             this.addWallRecipe(
                 block,
                 0,
-                Blocks.stained_hardened_clay,
+                Blocks.STAINED_HARDENED_CLAY,
                 ColorUtility.COLOR_COUNT - i - 1);
         }
     }

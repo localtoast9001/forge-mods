@@ -29,7 +29,7 @@ public class BlockThatchedRoofing extends BlockRoofing {
      * Initializes a new instance of the BlockThatchedRoofing class.
      */
     public BlockThatchedRoofing() {
-        super(Blocks.hay_block.getStateFromMeta(0));
+        super(Blocks.HAY_BLOCK.getStateFromMeta(0));
         this.setUnlocalizedName(NAME);
     }
 

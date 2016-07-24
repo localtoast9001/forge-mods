@@ -41,10 +41,10 @@ public class BlockWattleAndDaub extends Block {
      * Initializes a new instance of the BlockWattleAndDaub class.
      */
     public BlockWattleAndDaub() {
-        super(Material.rock);
+        super(Material.ROCK);
         this.setUnlocalizedName(NAME);
-        this.setStepSound(SoundType.STONE);
-        this.setCreativeTab(CreativeTabs.tabBlock);
+        this.setSoundType(SoundType.STONE);
+        this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
         this.setHardness(HARDNESS);
         this.setResistance(RESISTANCE);
     }

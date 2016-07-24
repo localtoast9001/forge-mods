@@ -67,15 +67,15 @@ public abstract class BlockStainedBrickSlab extends BlockSlab {
      */
     public BlockStainedBrickSlab(
         final int brickColor) {
-        super(Material.rock);
+        super(Material.ROCK);
         this.color = brickColor;
         this.useNeighborBrightness = !this.isDouble();
         setHardness(HARDNESS);
         setResistance(RESISTANCE);
-        setStepSound(SoundType.STONE);
+        setSoundType(SoundType.STONE);
         setUnlocalizedName(NAME + '_' + ColorUtility.COLOR_NAMES[this.color]);
         if (!this.isDouble()) {
-            setCreativeTab(CreativeTabs.tabBlock);
+            setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
         }
 
         IBlockState blockState = this.blockState.getBaseState();

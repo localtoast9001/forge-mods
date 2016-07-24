@@ -30,6 +30,6 @@ public class ItemBrickClay extends Item {
      */
     public ItemBrickClay() {
         setUnlocalizedName(NAME);
-        setCreativeTab(CreativeTabs.tabMaterials);
+        setCreativeTab(CreativeTabs.MATERIALS);
     }
 }

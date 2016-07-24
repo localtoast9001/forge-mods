@@ -41,10 +41,10 @@ public class BlockWattlePanel extends BlockPane {
      * Initializes a new instance of the BlockWattlePanel class.
      */
     public BlockWattlePanel() {
-        super(Material.wood, true);
+        super(Material.WOOD, true);
         this.setHardness(HARDNESS);
         this.setResistance(RESISTANCE);
-        this.setStepSound(SoundType.WOOD);
+        this.setSoundType(SoundType.WOOD);
         this.setUnlocalizedName(NAME);
     }
 

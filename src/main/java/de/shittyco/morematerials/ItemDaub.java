@@ -40,7 +40,7 @@ public class ItemDaub extends Item {
      */
     public ItemDaub() {
         setUnlocalizedName(NAME);
-        setCreativeTab(CreativeTabs.tabMaterials);
+        setCreativeTab(CreativeTabs.MATERIALS);
     }
 
     /**
@@ -58,7 +58,7 @@ public class ItemDaub extends Item {
         final EntityPlayer entityPlayer,
         EnumHand hand) {
         RayTraceResult movingobjectposition =
-            this.getMovingObjectPositionFromPlayer(world, entityPlayer, true);
+            this.rayTrace(world, entityPlayer, true);
         if (movingobjectposition == null) {
             return new ActionResult(EnumActionResult.PASS, itemStackIn);
         }

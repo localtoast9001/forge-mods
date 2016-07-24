@@ -39,7 +39,7 @@ public class BlockStainedHardenedClayWall extends BlockGenericWall {
      * @param blockColor the stain color.
      */
     public BlockStainedHardenedClayWall(final int blockColor) {
-        super(Blocks.stained_hardened_clay, blockColor);
+        super(Blocks.STAINED_HARDENED_CLAY, blockColor);
         this.color = blockColor;
         this.setUnlocalizedName(
                 NAME

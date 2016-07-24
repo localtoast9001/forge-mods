@@ -41,12 +41,12 @@ public class BlockStainedBricks extends ColoredBlock {
      * Initializes a new instance of the BlockStainedBricks class.
      */
     public BlockStainedBricks() {
-        super(Material.rock);
+        super(Material.ROCK);
         setHardness(HARDNESS);
         setResistance(RESISTANCE);
-        setStepSound(SoundType.STONE);
+        setSoundType(SoundType.STONE);
         setUnlocalizedName(NAME);
-        setCreativeTab(CreativeTabs.tabBlock);
+        setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
     }
 
     /**
