@@ -1,0 +1,6 @@
+{
+    "parent": "block/wall_post",
+    "textures": {
+        "wall": "blocks/hardened_clay_stained_gray"
+    }
+}

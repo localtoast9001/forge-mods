@@ -1,0 +1,8 @@
+{
+    "parent": "block/stairs",
+    "textures": {
+        "bottom": "morematerials:blocks/stainedbricks_green",
+        "top": "morematerials:blocks/stainedbricks_green",
+        "side": "morematerials:blocks/stainedbricks_green"
+    }
+}

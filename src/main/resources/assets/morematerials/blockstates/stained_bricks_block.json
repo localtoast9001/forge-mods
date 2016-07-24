@@ -1,0 +1,20 @@
+{
+    "variants": {
+        "variant=black": { "model": "morematerials:stained_bricks_block_black" },
+        "variant=red": { "model": "morematerials:stained_bricks_block_red" },
+        "variant=green": { "model": "morematerials:stained_bricks_block_green" },
+        "variant=brown": { "model": "morematerials:stained_bricks_block_brown" },
+        "variant=blue": { "model": "morematerials:stained_bricks_block_blue" },
+        "variant=purple": { "model": "morematerials:stained_bricks_block_purple" },
+        "variant=cyan": { "model": "morematerials:stained_bricks_block_cyan" },
+        "variant=silver": { "model": "morematerials:stained_bricks_block_silver" },
+        "variant=gray": { "model": "morematerials:stained_bricks_block_gray" },
+        "variant=pink": { "model": "morematerials:stained_bricks_block_pink" },
+        "variant=lime": { "model": "morematerials:stained_bricks_block_lime" },
+        "variant=yellow": { "model": "morematerials:stained_bricks_block_yellow" },
+        "variant=light_blue": { "model": "morematerials:stained_bricks_block_light_blue" },
+        "variant=magenta": { "model": "morematerials:stained_bricks_block_magenta" },
+        "variant=orange": { "model": "morematerials:stained_bricks_block_orange" },
+        "variant=white": { "model": "morematerials:stained_bricks_block_white" }
+    }
+}

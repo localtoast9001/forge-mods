@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "variant=false": { "model": "morematerials:stained_bricks_block_light_blue" },
+        "variant=true":    { "model": "morematerials:stained_bricks_block_light_blue" }
+    }
+}

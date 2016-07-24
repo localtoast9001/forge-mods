@@ -1,0 +1,10 @@
+{
+    "parent": "morematerials:block/outer_roofing",
+    "textures": {
+        "back": "blocks/planks_oak",
+        "bottom": "blocks/planks_oak",
+        "front": "blocks/hay_block_top",
+        "top": "blocks/hay_block_top",
+        "side": "blocks/hay_block_top"
+    }
+}

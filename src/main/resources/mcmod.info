@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "morematerials",
+  "name": "More Materials",
+  "description": "More building materials and options.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["Localtoast9001"],
+  "credits": "Localtoast9001",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
