@@ -5,7 +5,9 @@
 package de.shittyco.morematerials;
 
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.IForgeRegistry;
 
 /**
  * Common Game related utility methods.
@@ -20,7 +22,8 @@ public final class GameUtility {
      * @return the matching item.
      */
     public static Item getItemFromBlock(final String name) {
-        return GameRegistry.findItem("morematerials", name);
+        IForgeRegistry<Item> itemRegistry = GameRegistry.findRegistry(Item.class);
+        return itemRegistry.getValue(new ResourceLocation("morematerials", name));
     }
 
     /**

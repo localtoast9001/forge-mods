@@ -11,8 +11,11 @@ import net.minecraft.block.BlockStairs;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -307,11 +310,45 @@ public class MoreMaterialsMod {
     }
 
     /**
+     * Registers the item and sets its registry name.
+     * @param item The item to register.
+     * @param itemId The registry name for the item.
+     */
+    private void registerItem(
+        Item item,
+        String itemId) {
+        item.setRegistryName(new ResourceLocation(MODID, itemId));
+        GameRegistry.register(item);
+    }
+
+    /**
+     * Sets the block's registry name and registers it.
+     * @param block The block to register.
+     * @param blockId The id of the block.
+     */
+    private void registerBlock(
+        Block block,
+        String blockId) {
+        this.registerBlock(block, new ItemBlock(block), blockId);
+    }
+
+    private void registerBlock(
+        Block block,
+        ItemBlock itemBlock,
+        String blockId) {
+        ResourceLocation registryName = new ResourceLocation(MODID, blockId);
+        block.setRegistryName(registryName);
+        itemBlock.setRegistryName(registryName);
+        GameRegistry.register(block);
+        GameRegistry.register(itemBlock);
+    }
+
+    /**
      * Initializes tool items.
      */
     private void initTools() {
         paintbrush = new ItemPaintbrush();
-        GameRegistry.registerItem(paintbrush, ItemPaintbrush.ID);
+        this.registerItem(paintbrush, ItemPaintbrush.ID);
         proxy.registerInventoryModel(paintbrush, ItemPaintbrush.ID, 0);
     }
 
@@ -330,54 +367,56 @@ public class MoreMaterialsMod {
         stainedBrickWallBlocks =
                 new BlockStainedBrickWall[ColorUtility.COLOR_COUNT];
 
-        GameRegistry.registerItem(brickClay, ItemBrickClay.ID);
+        this.registerItem(brickClay, ItemBrickClay.ID);
         proxy.registerInventoryModel(brickClay, ItemBrickClay.ID, 0);
 
-        GameRegistry.registerItem(stainedBrickClay, ItemStainedBrickClay.ID);
-        GameRegistry.registerItem(stainedBrick, ItemStainedBrick.ID);
+        this.registerItem(stainedBrickClay, ItemStainedBrickClay.ID);
+        this.registerItem(stainedBrick, ItemStainedBrick.ID);
         stainedBrickClay.registerModels(proxy);
         stainedBrick.registerModels(proxy);
 
-        GameRegistry.registerBlock(
-                stainedBrickBlocks,
-                ItemBlockStainedBricks.class,
-                BlockStainedBricks.ID);
+        this.registerBlock(
+            stainedBrickBlocks,
+            new ItemBlockStainedBricks(stainedBrickBlocks),
+            BlockStainedBricks.ID);
         stainedBrickBlocks.registerModels(proxy);
 
         brickWall = new BlockBrickWall();
-        GameRegistry.registerBlock(
+        this.registerBlock(
             brickWall,
             BlockBrickWall.ID);
         brickWall.registerModels(proxy);
         addWallRecipe(brickWall, 0, Blocks.BRICK_BLOCK, 0);
 
         for (int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
-            BlockStainedBrickSlab slab = new BlockHalfStainedBrickSlab(i);
-            BlockStainedBrickSlab doubleSlab =
+            BlockHalfStainedBrickSlab slab = new BlockHalfStainedBrickSlab(i);
+            BlockDoubleStainedBrickSlab doubleSlab =
                 new BlockDoubleStainedBrickSlab(i);
             stainedBrickSlabBlocks[2 * i] = slab;
             stainedBrickSlabBlocks[2 * i + 1] = doubleSlab;
-            GameRegistry.registerBlock(
+            this.registerBlock(
                 slab,
-                ItemBlockStainedBrickSlab.class,
-                slab.getId(),
-                slab,
+                new ItemBlockStainedBrickSlab(
+                    slab,
+                    slab,
+                    doubleSlab,
+                    false),
+                slab.getId());
+            this.registerBlock(
                 doubleSlab,
-                false);
-            GameRegistry.registerBlock(
-                doubleSlab,
-                ItemBlockStainedBrickSlab.class,
-                doubleSlab.getId(),
-                slab,
-                doubleSlab,
-                true);
+                new ItemBlockStainedBrickSlab(
+                    doubleSlab,
+                    slab,
+                    doubleSlab,
+                    true),
+                doubleSlab.getId());
             slab.registerModels(proxy);
             doubleSlab.registerModels(proxy);
 
             BlockStainedBrickStairs stairs = new BlockStainedBrickStairs(
                 stainedBrickBlocks,
                 i);
-            GameRegistry.registerBlock(stairs, stairs.getId());
+            this.registerBlock(stairs, stairs.getId());
             stairs.registerModels(proxy);
             addSlabRecipes(slab, 0, stainedBrickBlocks, i);
             addStairsRecipes(stairs, 0, stainedBrickBlocks, i);
@@ -386,7 +425,7 @@ public class MoreMaterialsMod {
                 stainedBrickBlocks,
                 i);
             stainedBrickWallBlocks[i] = wall;
-            GameRegistry.registerBlock(wall, wall.getId());
+            this.registerBlock(wall, wall.getId());
             wall.registerModels(proxy);
             addWallRecipe(wall, 0, stainedBrickBlocks, i);
         }
@@ -441,47 +480,47 @@ public class MoreMaterialsMod {
      */
     private void initWattleAndDaub() {
         daub = new ItemDaub();
-        GameRegistry.registerItem(daub, ItemDaub.ID);
+        this.registerItem(daub, ItemDaub.ID);
         proxy.registerInventoryModel(daub, ItemDaub.ID, 0);
 
         wattlePanel = new BlockWattlePanel();
-        GameRegistry.registerBlock(
+        this.registerBlock(
             wattlePanel,
             BlockWattlePanel.ID);
         wattlePanel.registerModels(proxy);
 
         wattleAndDaub = new BlockWattleAndDaub();
-        GameRegistry.registerBlock(
+        this.registerBlock(
             wattleAndDaub,
             BlockWattleAndDaub.ID);
         wattleAndDaub.registerModels(proxy);
 
         woodenFrame = new BlockWoodenFrame();
-        GameRegistry.registerBlock(
+        this.registerBlock(
             woodenFrame,
-            ItemBlockWoodenFrame.class,
+            new ItemBlockWoodenFrame(woodenFrame),
             BlockWoodenFrame.ID);
         woodenFrame.registerModels(proxy);
 
         crossWoodenFrame = new BlockCrossWoodenFrame();
-        GameRegistry.registerBlock(
+        this.registerBlock(
             crossWoodenFrame,
-            ItemBlockWoodenFrame.class,
+            new ItemBlockWoodenFrame(crossWoodenFrame),
             BlockCrossWoodenFrame.ID);
         crossWoodenFrame.registerModels(proxy);
 
         slashWoodenFrame = new BlockSlashWoodenFrame();
-        GameRegistry.registerBlock(
+        this.registerBlock(
             slashWoodenFrame,
-            ItemBlockWoodenFrame.class,
+            new ItemBlockWoodenFrame(slashWoodenFrame),
             BlockSlashWoodenFrame.ID);
         slashWoodenFrame.registerModels(proxy);
 
         backslashWoodenFrame = new BlockBackslashWoodenFrame();
-        GameRegistry.registerBlock(
-                backslashWoodenFrame,
-                ItemBlockWoodenFrame.class,
-                BlockBackslashWoodenFrame.ID);
+        this.registerBlock(
+            backslashWoodenFrame,
+            new ItemBlockWoodenFrame(backslashWoodenFrame),
+            BlockBackslashWoodenFrame.ID);
         backslashWoodenFrame.registerModels(proxy);
 
         this.initWattleAndDaubRecipes();
@@ -606,7 +645,7 @@ public class MoreMaterialsMod {
      */
     private void initRoofing() {
         thatchedRoofing = new BlockThatchedRoofing();
-        GameRegistry.registerBlock(
+        this.registerBlock(
             thatchedRoofing,
             BlockThatchedRoofing.ID);
         thatchedRoofing.registerModels(proxy);
@@ -636,7 +675,7 @@ public class MoreMaterialsMod {
      */
     private void initHardenedClay() {
         hardenedClayWall = new BlockHardenedClayWall();
-        GameRegistry.registerBlock(
+        this.registerBlock(
             hardenedClayWall,
             BlockHardenedClayWall.ID);
         hardenedClayWall.registerModels(proxy);
@@ -649,7 +688,7 @@ public class MoreMaterialsMod {
                 new BlockStainedHardenedClayWall(i);
             stainedHardenedClayWallBlocks[i] = block;
 
-            GameRegistry.registerBlock(block, block.getId());
+            this.registerBlock(block, block.getId());
             block.registerModels(proxy);
 
             // NOTE: metadata for stained hardened clay is backwards.

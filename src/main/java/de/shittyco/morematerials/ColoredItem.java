@@ -7,6 +7,7 @@ package de.shittyco.morematerials;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -65,7 +66,7 @@ public abstract class ColoredItem extends Item {
     public final void getSubItems(
         final Item item,
         final CreativeTabs tabs,
-        final List subItems) {
+        final NonNullList<ItemStack> subItems) {
         for (int i = 0; i < ColorUtility.COLOR_COUNT; i++) {
             subItems.add(new ItemStack(item, 1, i));
         }

@@ -46,17 +46,16 @@ public class ItemDaub extends Item {
     /**
      * Called whenever this item is equipped and
      * the right mouse button is pressed.
-     * @param itemStackIn the stack in hand.
      * @param world reference to the world.
      * @param entityPlayer the player.
      * @return the modified item stack.
      */
     @Override
     public final ActionResult<ItemStack> onItemRightClick(
-        final ItemStack itemStackIn,
         final World world,
         final EntityPlayer entityPlayer,
         EnumHand hand) {
+        ItemStack itemStackIn = entityPlayer.getHeldItem(hand);
         RayTraceResult movingobjectposition =
             this.rayTrace(world, entityPlayer, true);
         if (movingobjectposition == null) {
@@ -73,7 +72,7 @@ public class ItemDaub extends Item {
                     = MoreMaterialsMod.getWattleAndDaub().getDefaultState();
                 world.setBlockState(targetBlockPos, newState);
                 if (!entityPlayer.capabilities.isCreativeMode) {
-                    itemStackIn.stackSize--;
+                    itemStackIn.func_190918_g(-1);
                 }
             }
         }
